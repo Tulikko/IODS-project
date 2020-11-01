@@ -1,17 +1,15 @@
 
 # About the project
 
-*Write a short description about the course and add a link to your GitHub repository here. This is an R Markdown (.Rmd) file so you should use R Markdown syntax.*
+The initial setting up of all the necessary tools proved to be a bit of a challenge. R Studio didn't seem to be able to download all the necessary packages for "knitting" the changes. However, after a rather lengthy troubleshooting session and some help everything finally fell into place.
 
-Halloo?
+The R excercises in DataCamp were simple enough, so I do hope that the rest of the course will be a breeze in comparison. :D
+
+Here's a link to my [repository](https://github.com/Tulikko/IODS-project)!
 
 ```{r}
-# This is a so-called "R chunk" where you can write R code.
 
 date()
 
 ```
-Buuuuuu
-gdtFYDTF
-HAUDH
-AHVSUAV
+Learning R was anyway something that I intended to do. After the course I hope to be able to do at least principal component analysis (PCA) and hierarchical cluster analysis (HCA) for our project data without relying on commercial tools.
