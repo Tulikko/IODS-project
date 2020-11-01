@@ -1,5 +1,6 @@
 ---
 title: "Uine's IODS course project"
+author: "Uine Kailamäki"
 output:
   html_document:
     theme: cosmo
