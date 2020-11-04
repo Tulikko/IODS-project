@@ -452,15 +452,29 @@ summary {
 <p>Here’s a link to my <a href="https://github.com/Tulikko/IODS-project">repository</a>!</p>
 <p>Learning R was anyway something that I intended to do. After the course I hope to be able to do at least principal component analysis (PCA) and hierarchical cluster analysis (HCA) for our project data without relying on commercial tools.</p>
 <pre class="r"><code>date()</code></pre>
-<pre><code>## [1] &quot;Thu Nov 05 00:34:15 2020&quot;</code></pre>
+<pre><code>## [1] &quot;Thu Nov 05 00:38:09 2020&quot;</code></pre>
 <hr />
 </div>
 <div id="rstudio-exercise-2" class="section level1">
 <h1>RStudio Exercise 2</h1>
 <p><em>Describe the work you have done this week and summarize your learning.</em></p>
-<p>Here is the dataset that I wrangled in the previous part of the excercise.</p>
-<pre class="r"><code>date()</code></pre>
-<pre><code>## [1] &quot;Thu Nov 05 00:34:15 2020&quot;</code></pre>
+<p>Here is the dataset that I wrangled in the previous part of the excercise. The full table is at the end, but first let’s just take a look at what we’ve got.</p>
+<pre class="r"><code># assigning the data to something easier to write in codes
+lrn2020 &lt;- read.table(&quot;data/learning2020.txt&quot;)
+
+# dimensions of data: 183 observations and 7 variables
+dim(lrn2020)</code></pre>
+<pre><code>## [1] 183   7</code></pre>
+<pre class="r"><code># structure of data: shows as a table
+str(lrn2020)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    183 obs. of  7 variables:
+##  $ gender  : chr  &quot;F&quot; &quot;M&quot; &quot;F&quot; &quot;M&quot; ...
+##  $ Age     : int  53 55 49 53 49 38 50 37 37 42 ...
+##  $ Attitude: int  37 31 25 35 37 38 35 29 38 21 ...
+##  $ deep    : num  3.58 2.92 3.5 3.5 3.67 ...
+##  $ stra    : num  3.38 2.75 3.62 3.12 3.62 ...
+##  $ surf    : num  2.58 3.17 2.25 2.25 2.83 ...
+##  $ Points  : int  25 12 24 10 22 21 21 31 24 26 ...</code></pre>
 <pre class="r"><code># reading the wrangled analysis csv
 read.table(&quot;data/learning2020.txt&quot;)</code></pre>
 <pre><code>##     gender Age Attitude     deep  stra     surf Points
@@ -647,22 +661,8 @@ read.table(&quot;data/learning2020.txt&quot;)</code></pre>
 ## 181      F  18       37 3.166667 2.625 3.416667     18
 ## 182      F  19       36 3.416667 2.625 3.000000     30
 ## 183      M  21       18 4.083333 3.375 2.666667     19</code></pre>
-<pre class="r"><code># assigning the data to something easier to write in codes
-lrn2020 &lt;- read.table(&quot;data/learning2020.txt&quot;)
-
-# dimensions of data: 183 observations and 7 variables
-dim(lrn2020)</code></pre>
-<pre><code>## [1] 183   7</code></pre>
-<pre class="r"><code># structure of data: shows as a table
-str(lrn2020)</code></pre>
-<pre><code>## &#39;data.frame&#39;:    183 obs. of  7 variables:
-##  $ gender  : chr  &quot;F&quot; &quot;M&quot; &quot;F&quot; &quot;M&quot; ...
-##  $ Age     : int  53 55 49 53 49 38 50 37 37 42 ...
-##  $ Attitude: int  37 31 25 35 37 38 35 29 38 21 ...
-##  $ deep    : num  3.58 2.92 3.5 3.5 3.67 ...
-##  $ stra    : num  3.38 2.75 3.62 3.12 3.62 ...
-##  $ surf    : num  2.58 3.17 2.25 2.25 2.83 ...
-##  $ Points  : int  25 12 24 10 22 21 21 31 24 26 ...</code></pre>
+<pre class="r"><code>date()</code></pre>
+<pre><code>## [1] &quot;Thu Nov 05 00:38:09 2020&quot;</code></pre>
 <p>Room for more text in Markdown here!</p>
 <hr />
 <p>(more chapters to be added similarly as we proceed with the course!)</p>

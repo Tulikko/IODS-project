@@ -2,13 +2,9 @@
 
 *Describe the work you have done this week and summarize your learning.*
 
-Here is the dataset that I wrangled in the previous part of the excercise.
+Here is the dataset that I wrangled in the previous part of the excercise. The full table is at the end, but first let's just take a look at what we've got.
 
 ```{r}
-date()
-
-# reading the wrangled analysis csv
-read.table("data/learning2020.txt")
 
 # assigning the data to something easier to write in codes
 lrn2020 <- read.table("data/learning2020.txt")
@@ -18,6 +14,12 @@ dim(lrn2020)
 
 # structure of data: shows as a table
 str(lrn2020)
+
+# reading full analysis csv
+read.table("data/learning2020.txt")
+
+date()
+
 ```
 
 Room for more text in Markdown here!
