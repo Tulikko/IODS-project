@@ -7,9 +7,9 @@ The R excercises in DataCamp were simple enough, so I do hope that the rest of t
 
 Here's a link to my [repository](https://github.com/Tulikko/IODS-project)!
 
+Learning R was anyway something that I intended to do. After the course I hope to be able to do at least principal component analysis (PCA) and hierarchical cluster analysis (HCA) for our project data without relying on commercial tools.
 ```{r}
 
 date()
 
 ```
-Learning R was anyway something that I intended to do. After the course I hope to be able to do at least principal component analysis (PCA) and hierarchical cluster analysis (HCA) for our project data without relying on commercial tools.
