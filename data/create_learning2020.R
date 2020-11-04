@@ -33,6 +33,9 @@ keep_c <- c("gender","Age","Attitude", "deep", "stra", "surf", "Points")
 # Creating the analysis dataset with chosen columns
 learning2020 <- select(lrn14, one_of(keep_c))
 
+# select rows where points is greater than zero
+learning2020 <- filter(learning2020, Points > 0)
+
 # Checking if everything is as it should. I have 183 observations instead of 166 like the instruction said I should have? But 7 variables like I should, so at least that's great.
 str(learning2020)
 

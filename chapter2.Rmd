@@ -12,10 +12,13 @@ lrn2020 <- read.table("data/learning2020.txt")
 # dimensions of data: 183 observations and 7 variables
 dim(lrn2020)
 
-# structure of data: shows as a table
+# structure of data: str() / gives you structural info and the amount of obs. & variables
 str(lrn2020)
 
-# reading full analysis csv
+# structure of data: head() / I like this a bit more than str() for structural info, easier to read!
+head(lrn2020)
+
+# full analysis csv
 read.table("data/learning2020.txt")
 
 date()
