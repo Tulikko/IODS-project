@@ -36,11 +36,18 @@ learning2020 <- select(lrn14, one_of(keep_c))
 # Checking if everything is as it should. I have 183 observations instead of 166 like the instruction said I should have? But 7 variables like I should, so at least that's great.
 str(learning2020)
 
-# Saving the analysis dataset to csv file 
+# Saving the analysis dataset to csv file and txt file
 write.csv(learning2020, "learning2020.csv")
+write.table(learning2020, "learning2020.txt")
 
 # Checking the csv
 read.csv("learning2020.csv")
 str(read.csv("learning2020.csv"))
 head(read.csv("learning2020.csv"))
+
+# Checking the txt file
+read.table("learning2020.txt")
+str(read.table("learning2020.txt"))
+head(read.table("learning2020.txt"))
+
 
