@@ -458,7 +458,7 @@ summary {
 <p>Here’s a link to my <a href="https://github.com/Tulikko/IODS-project">repository</a>!</p>
 <p>Learning R was anyway something that I intended to do. After the course I hope to be able to do at least principal component analysis (PCA) and hierarchical cluster analysis (HCA) for our project data without relying on commercial tools.</p>
 <pre class="r"><code>date()</code></pre>
-<pre><code>## [1] &quot;Thu Nov 05 09:13:12 2020&quot;</code></pre>
+<pre><code>## [1] &quot;Thu Nov 05 09:25:30 2020&quot;</code></pre>
 <hr />
 </div>
 <div id="rstudio-exercise-2" class="section level1">
@@ -515,6 +515,30 @@ p</code></pre>
 <div id="part-3" class="section level2">
 <h2>Part 3</h2>
 <p>Choose three variables as explanatory variables and fit a regression model where exam points is the target (dependent) variable. Show a summary of the fitted model and comment and interpret the results. Explain and interpret the statistical test related to the model parameters. If an explanatory variable in your model does not have a statistically significant relationship with the target variable, remove the variable from the model and fit the model again without it.</p>
+<pre class="r"><code># creating model with points versus attitude, strategic and deep learning
+model_x &lt;- lm(Points ~ Attitude + stra + deep, data = lrn2020)
+
+summary(model_x)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = Points ~ Attitude + stra + deep, data = lrn2020)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -17.5239  -3.4276   0.5474   3.8220  11.5112 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 11.39145    3.40775   3.343  0.00103 ** 
+## Attitude     0.35254    0.05683   6.203 4.44e-09 ***
+## stra         0.96208    0.53668   1.793  0.07489 .  
+## deep        -0.74920    0.75066  -0.998  0.31974    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 5.289 on 162 degrees of freedom
+## Multiple R-squared:  0.2097, Adjusted R-squared:  0.195 
+## F-statistic: 14.33 on 3 and 162 DF,  p-value: 2.521e-08</code></pre>
 </div>
 <div id="part-4" class="section level2">
 <h2>Part 4</h2>
@@ -524,7 +548,7 @@ p</code></pre>
 <h2>Part 5</h2>
 <p>Produce the following diagnostic plots: Residuals vs Fitted values, Normal QQ-plot and Residuals vs Leverage. Explain the assumptions of the model and interpret the validity of those assumptions based on the diagnostic plots.</p>
 <pre class="r"><code>date()</code></pre>
-<pre><code>## [1] &quot;Thu Nov 05 09:13:20 2020&quot;</code></pre>
+<pre><code>## [1] &quot;Thu Nov 05 09:25:38 2020&quot;</code></pre>
 <hr />
 <p>(more chapters to be added similarly as we proceed with the course!)</p>
 </div>
