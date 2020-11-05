@@ -1,5 +1,8 @@
 # Uine Kailamäki 04/11/2020 file for the IODS course
 
+#library
+library(dplyr)
+
 # import data from web source, separator tab (\t), includes header
 lrn14 <- read.table("https://www.mv.helsinki.fi/home/kvehkala/JYTmooc/JYTOPKYS3-data.txt", sep="\t", header=TRUE)
 
@@ -33,13 +36,13 @@ lrn14$attitude <- lrn14$Attitude / 10
 # selecting which columns to keep
 keep_c <- c("gender","Age","attitude", "deep", "stra", "surf", "Points")
 
-# changing the name of the second column "Age" to "age"
-colnames(learning2014)[2] <- "age"
-
 # Creating the analysis dataset with chosen columns
 learning2020 <- select(lrn14, one_of(keep_c))
 
-# select rows where points is greater than zero
+# Changing the name of the second column "Age" to "age"
+colnames(learning2020)[2] <- "age"
+
+# Select rows where points is greater than zero
 learning2020 <- filter(learning2020, Points > 0)
 
 # Checking if everything is as it should. Looks like it!
