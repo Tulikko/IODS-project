@@ -27,8 +27,14 @@ lrn14$stra <- rowMeans(stra_c)
 surf_c <- select(lrn14, one_of(surf_q))
 lrn14$surf <- rowMeans(surf_c)
 
+# creating column 'attitude' by scaling the column "Attitude"
+lrn14$attitude <- lrn14$Attitude / 10
+
 # selecting which columns to keep
-keep_c <- c("gender","Age","Attitude", "deep", "stra", "surf", "Points")
+keep_c <- c("gender","Age","attitude", "deep", "stra", "surf", "Points")
+
+# changing the name of the second column "Age" to "age"
+colnames(learning2014)[2] <- "age"
 
 # Creating the analysis dataset with chosen columns
 learning2020 <- select(lrn14, one_of(keep_c))

@@ -34,6 +34,14 @@ p <- ggpairs(lrn2020, mapping = aes(col = gender, alpha = 0.3), lower = list(com
 #printing out the created matrix "p"
 p
 
+# a scatter plot of points versus attitude
+qplot(Attitude, Points, data = lrn2020) + geom_smooth(method = "lm")
+
+# select male students
+male_students <- dplyr::filter(lrn2020, lrn2020$gender == "M")
+
+qplot(Attitude, Points, data = lrn2020) + geom_smooth(method = "lm")
+
 ```
 
 ## Part 3
