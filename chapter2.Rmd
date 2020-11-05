@@ -57,7 +57,9 @@ qplot(attitude, points, data = f_students) + geom_smooth(method = "lm") + ggtitl
 ```
 
 ## Part 3
-Choose three variables as explanatory variables and fit a regression model where exam points is the target (dependent) variable. Show a summary of the fitted model and comment and interpret the results. Explain and interpret the statistical test related to the model parameters. If an explanatory variable in your model does not have a statistically significant relationship with the target variable, remove the variable from the model and fit the model again without it. 
+Based on the previous results, I chose attitude, strategic learning and deep learning as explanatory variables to a regression model (model_x), in which exam points is the target (dependent) variable. 
+
+According to the results shown in the summary, deep learning did not have strong significance to the points with a p value of 0.31974. I redid the model (model_y) by discarding deep learning from it.
 ```{r}
 
 # creating model with points versus attitude, strategic and deep learning
@@ -65,9 +67,15 @@ model_x <- lm(points ~ attitude + stra + deep, data = lrn2020)
 
 summary(model_x)
 
+# creating adjusted model with points versus attitude and strategic learning
+model_y <- lm(points ~ attitude + stra, data = lrn2020)
+
+summary(model_y)
 ```
 ## Part 4 
-Using a summary of your fitted model, explain the relationship between the chosen explanatory variables and the target variable (interpret the model parameters). Explain and interpret the multiple R squared of the model.
+In the adjusted model, attitude and the intercept are clearly significant, but strategic learning (p-value 0.08927) has ~9 % risk of not being significant.
+
+Multiple R-squared -value (0.2048) means that 20,48 % of the total variation in exam points can be explained by this model. The higher this value is, the better the model explains variation.
 ```{r}
 
 ```
