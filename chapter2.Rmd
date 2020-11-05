@@ -3,6 +3,7 @@
 *Here I describe the work that I have done.*
 
 ## Part 1 
+
 Here is the dataset that I wrangled in the previous part of the excercise. The full analysis dataset table can be read with read.table("data/learning2020.txt"), but that would be a ton of hard-to-read data to display in this diary page, so let's just take a closer look at the structure and dimensions of what we've got.
 
 ```{r}
@@ -20,7 +21,9 @@ head(lrn2020)
 
 ```
 ## Part 2 
-Show a graphical overview of the data and show summaries of the variables in the data. Describe and interpret the outputs, commenting on the distributions of the variables and the relationships between them. 
+
+Here I explore the data by summary function and by creating miscellaneous plots. In the graphical overview (produced with the function "ggpairs") we see that the highest correlation value between two variables is between attitude and points, with correlation value of 0.437 (highest or 100% correlation being 1). I also explored this phenomena by playing around with gendered scatterplots and fitted lines.
+
 ```{r}
 # accessing GGally-library 
 library(GGally)
@@ -52,9 +55,11 @@ qplot(attitude, points, data = m_students) + geom_smooth(method = "lm") + ggtitl
 ```
 
 ## Part 3
+
 Based on the previous results, I chose attitude, strategic learning and deep learning as explanatory variables to a regression model (model_x), in which exam points is the target (dependent) variable. 
 
 According to the results shown in the summary, deep learning did not have strong significance to the points with a p value of 0.31974. I redid the model (model_y) by discarding deep learning from it.
+
 ```{r}
 
 # creating model with points versus attitude, strategic and deep learning
@@ -68,16 +73,24 @@ model_y <- lm(points ~ attitude + stra, data = lrn2020)
 summary(model_y)
 ```
 ## Part 4 
+
 In the adjusted model, attitude and the intercept are clearly significant, but strategic learning (p-value 0.08927) has ~9 % risk of not being significant.
 
 Multiple R-squared -value (0.2048) means that 20,48 % of the total variation in exam points can be explained by this model. The higher this value is, the better the model explains variation.
+
 ```{r}
 
 ```
 ## Part 5 
+
 In this part I produced a few diagnostic plots: Residuals vs Fitted values, Normal QQ-plot and Residuals vs Leverage. 
 
-Explain the assumptions of the model and interpret the validity of those assumptions based on the diagnostic plots.
+In linear regression it is assumed that residuals are normally distributed, and the size of the errors do not depend on the variables. "Residuals versus fitted values" shows that there is no trend between these values, which is a positive sign.
+
+"Normal Q-Q" -plot examines the normality assumption of residuals, and it is good if points plot in to the line shown. There is some scatter at the edges, but overall situation is not bad. 
+
+"Residuals versus leverage" shows how much single data points deviate the model parameters. In this case, no single observation is shown to have a very strong impact to the parameters.
+
 ```{r}
 par(mfrow = c(2,2))
 plot(model_x, which = c(1,2,5))
