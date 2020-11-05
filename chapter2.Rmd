@@ -9,7 +9,7 @@ Here is the dataset that I wrangled in the previous part of the excercise. The f
 # assigning the data to something easier to write in codes
 lrn2020 <- read.table("data/learning2020.txt")
 
-# dimensions of data: 183 observations and 7 variables
+# dimensions of data: 166 observations and 7 variables
 dim(lrn2020)
 
 # structure of data: str() / gives you structural info and the amount of obs. & variables
