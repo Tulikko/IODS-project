@@ -44,10 +44,13 @@ colnames(learning2020)[2] <- "age"
 colnames(learning2020)[7] <- "points"
 
 # Select rows where points is greater than zero
-learning2020 <- filter(learning2020, Points > 0)
+learning2020 <- filter(learning2020, points > 0)
 
 # Checking if everything is as it should. Looks like it!
 str(learning2020)
+
+# Changing the working directory to data
+setwd("~/R/IODS-project/data")
 
 # Saving the analysis dataset to csv file and txt file
 write.csv(learning2020, "learning2020.csv")

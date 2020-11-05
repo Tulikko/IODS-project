@@ -35,13 +35,19 @@ p <- ggpairs(lrn2020, mapping = aes(col = gender, alpha = 0.3), lower = list(com
 p
 
 # a scatter plot of points versus attitude
-qplot(Attitude, Points, data = lrn2020) + geom_smooth(method = "lm")
+qplot(attitude, points, data = lrn2020) + geom_smooth(method = "lm") + ggtitle("All students' attitude versus exam points")
 
 # select male students
-male_students <- dplyr::filter(lrn2020, lrn2020$gender == "M")
+m_students <- dplyr::filter(lrn2020, lrn2020$gender == "M")
 
-qplot(Attitude, Points, data = lrn2020) + geom_smooth(method = "lm")
+# plot only male students, points vs. attitude
+qplot(attitude, points, data = m_students) + geom_smooth(method = "lm") + ggtitle("Male students' attitude versus exam points")
 
+# select female students
+f_students <- dplyr::filter(lrn2020, lrn2020$gender == "F")
+
+# plot only female students, points vs. attitude
+qplot(attitude, points, data = f_students) + geom_smooth(method = "lm") + ggtitle("Female students' attitude versus exam points")
 ```
 
 ## Part 3
@@ -49,7 +55,7 @@ Choose three variables as explanatory variables and fit a regression model where
 ```{r}
 
 # creating model with points versus attitude, strategic and deep learning
-model_x <- lm(Points ~ Attitude + stra + deep, data = lrn2020)
+model_x <- lm(points ~ attitude + stra + deep, data = lrn2020)
 
 summary(model_x)
 
