@@ -54,6 +54,9 @@ Using a summary of your fitted model, explain the relationship between the chose
 ## Part 5 
 Produce the following diagnostic plots: Residuals vs Fitted values, Normal QQ-plot and Residuals vs Leverage. Explain the assumptions of the model and interpret the validity of those assumptions based on the diagnostic plots.
 ```{r}
+par(mfrow = c(2,2))
+plot(model_x, which = c(1,2,5))
+
 date()
 ```
 
