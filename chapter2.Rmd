@@ -28,6 +28,8 @@ library(GGally)
 # accessing ggplot2-library
 library(ggplot2)
 
+ggplot(lrn2020, aes(x = attitude, y = points, col = gender)) + geom_point()
+
 # creating plot matrix "p"
 p <- ggpairs(lrn2020, mapping = aes(col = gender, alpha = 0.3), lower = list(combo = wrap("facethist", bins = 20)))
 
