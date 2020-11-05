@@ -28,15 +28,19 @@ library(GGally)
 # accessing ggplot2-library
 library(ggplot2)
 
-ggplot(lrn2020, aes(x = attitude, y = points, col = gender)) + geom_point()
+# summary of the data
+summary(lrn2020)
 
-# creating plot matrix "p"
+# creating plot matrix "p" to pair variables against each other, to see possible correlations
 p <- ggpairs(lrn2020, mapping = aes(col = gender, alpha = 0.3), lower = list(combo = wrap("facethist", bins = 20)))
 
-#printing out the created matrix "p"
+# printing out the created matrix "p"
 p
 
-# a scatter plot of points versus attitude
+# attitude and points seem to correlate, let's see more closely how the data looks like
+ggplot(lrn2020, aes(x = attitude, y = points, col = gender)) + geom_point()
+
+# a scatter plot of points versus attitude + fitted line
 qplot(attitude, points, data = lrn2020) + geom_smooth(method = "lm") + ggtitle("All students' attitude versus exam points")
 
 # select male students
