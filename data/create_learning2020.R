@@ -41,6 +41,7 @@ learning2020 <- select(lrn14, one_of(keep_c))
 
 # Changing the name of the second column "Age" to "age"
 colnames(learning2020)[2] <- "age"
+colnames(learning2020)[7] <- "points"
 
 # Select rows where points is greater than zero
 learning2020 <- filter(learning2020, Points > 0)
