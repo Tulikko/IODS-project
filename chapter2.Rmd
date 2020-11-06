@@ -4,7 +4,7 @@
 
 ## Part 1 
 
-Here is the dataset that I wrangled in the previous part of the excercise. The full analysis dataset table can be read with read.table("data/learning2020.txt"), but that would be a ton of hard-to-read data to display in this diary page, so let's just take a closer look at the structure and dimensions of what we've got.
+[Here](https://github.com/Tulikko/IODS-project/blob/master/data/create_learning2020.R) is the dataset that I wrangled in the previous part of the excercise. The full analysis dataset table can be read with read.table("data/learning2020.txt"), but that would be a ton of hard-to-read data to display in this diary page, so let's just take a closer look at the structure and dimensions of what we've got.
 
 ```{r}
 # assigning the data to something easier to write in codes
