@@ -1,0 +1,6 @@
+# RStudio Exercise 6
+
+```{r}
+
+
+```
