@@ -36,6 +36,9 @@ str(math)
 colnames(math)
 colnames(por)
 
+
+# From Reijo Sund's example: joining the datasets succesfully
+
 # Define own id for both datasets
 por_id <- por %>% mutate(id=1000+row_number()) 
 math_id <- math %>% mutate(id=2000+row_number())
@@ -53,9 +56,11 @@ pormath_free <- por_id %>% bind_rows(math_id) %>% select(one_of(free_cols))
 #         Original joining/merging example is erroneous!
 pormath <- por_id %>% 
   bind_rows(math_id) %>%
-  # Aggregate data (more joining variables than in the example)  
+ 
+   # Aggregate data (more joining variables than in the example)  
   group_by(.dots=join_cols) %>%  
-  # Calculating required variables from two obs  
+ 
+   # Calculating required variables from two obs  
   summarise(                                                           
     n=n(),
     id.p=min(id),
@@ -67,14 +72,18 @@ pormath <- por_id %>%
     G2=round(mean(G2)),
     G3=round(mean(G3))    
   ) %>%
+  
   # Remove lines that do not have exactly one obs from both datasets
   #   There must be exactly 2 observations found in order to joining be succesful
   #   In addition, 2 obs to be joined must be 1 from por and 1 from math
   #     (id:s differ more than max within one dataset (649 here))
+
   filter(n==2, id.m-id.p>650) %>%  
+  
   # Join original free fields, because rounded means or first values may not be relevant
   inner_join(pormath_free,by=c("id.p"="id"),suffix=c("",".p")) %>%
   inner_join(pormath_free,by=c("id.m"="id"),suffix=c("",".m")) %>%
+  
   # Calculate other required variables  
   ungroup %>% mutate(
     alc_use = (Dalc + Walc) / 2,
@@ -86,6 +95,11 @@ pormath <- por_id %>%
 library(openxlsx)
 write.xlsx(pormath,file="~/R/IODS-project/data/pormath.xlsx")
 
+# End of Reijo Sund's example
+
+
 pormath <- read.xlsx("pormath.xlsx")
 
 colnames(pormath)
+
+# NEED TO REMOVE "DOUBLES" NEXT
