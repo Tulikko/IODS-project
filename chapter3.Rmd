@@ -10,6 +10,5 @@
 ## Part 8 (Super-bonus)
 ```{r}
 
-date()
 
 ```

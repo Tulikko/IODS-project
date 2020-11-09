@@ -1,4 +1,5 @@
 
+
 # About the project
 
 The initial setting up of all the necessary tools proved to be a bit of a challenge. R Studio didn't seem to be able to download all the necessary packages for "knitting" the changes. However, after a rather lengthy troubleshooting session and some help everything finally fell into place.
@@ -8,6 +9,8 @@ The R excercises in DataCamp were simple enough, so I do hope that the rest of t
 Here's a link to my [repository](https://github.com/Tulikko/IODS-project)!
 
 Learning R was anyway something that I intended to do. After the course I hope to be able to do at least principal component analysis (PCA) and hierarchical cluster analysis (HCA) for our project data without relying on commercial tools.
+
+**Last updated:**
 ```{r}
 
 date()

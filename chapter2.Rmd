@@ -95,6 +95,4 @@ In linear regression it is assumed that residuals are normally distributed, and 
 par(mfrow = c(2,2))
 plot(model_x, which = c(1,2,5))
 
-date()
 ```
-
