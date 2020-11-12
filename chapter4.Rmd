@@ -1,4 +1,4 @@
-# RStudio Exercise 4
+# 4: Clustering and classification
 
 ```{r}
 

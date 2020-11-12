@@ -1,4 +1,4 @@
-# RStudio Exercise 6
+# 6: Analysis of longitudinal data
 
 ```{r}
 

@@ -1,4 +1,4 @@
-# RStudio Exercise 3
+# 3: Logistic regression
 
 ## Part 1 
 ## Part 2
@@ -6,8 +6,8 @@
 ## Part 4
 ## Part 5
 ## Part 6
-## Part 7 (Bonus)
-## Part 8 (Super-bonus)
+## Part 7
+## Part 8
 ```{r}
 
 

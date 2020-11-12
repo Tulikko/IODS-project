@@ -1,4 +1,4 @@
-# RStudio Exercise 2
+# 2: Regression and model validation
 
 *Here I describe the work that I have done.*
 
