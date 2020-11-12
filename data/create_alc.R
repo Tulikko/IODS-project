@@ -56,8 +56,6 @@ join_cols <- setdiff(colnames(por_id),free_cols)
 pormath_free <- por_id %>% bind_rows(math_id) %>% select(one_of(free_cols))
 
 # Combine datasets to one long data
-#   NOTE! There are 370 students that belong to both datasets
-#         Original joining/merging example is erroneous!
 pormath <- por_id %>% 
   bind_rows(math_id) %>%
  
@@ -98,8 +96,8 @@ pormath <- por_id %>%
 # End of Reijo Sund's example for joining data
 
 
-# selecting which columns to keep (to exclude the original .p and .m columns that were joined, I like my tables less messy)
-keep_c <- c("school","sex","age", "address", "famsize", "Pstatus", "Medu", "Fedu", "Mjob", "Fjob", "reason", "guardian", "traveltime", "studytime", "schoolsup", "famsup", "activities", "nursery", "higher", "internet", "romantic", "famrel", "freetime", "goout", "health", "n", "failures", "paid", "absences", "G1", "G2", "G3", "alc_use", "high_use", "cid")
+# selecting which columns to keep (to exclude the .p and .m columns, I like my tables less messy)
+keep_c <- c("school","sex","age", "address", "famsize", "Pstatus", "Medu", "Fedu", "Mjob", "Fjob", "reason", "guardian", "traveltime", "studytime", "schoolsup", "famsup", "activities", "nursery", "higher", "internet", "romantic", "famrel", "freetime", "goout", "health", "failures", "paid", "absences", "G1", "G2", "G3", "Dalc", "Walc", "alc_use", "high_use")
 
 # Creating the analysis dataset with chosen columns
 joined <- select(pormath, one_of(keep_c))

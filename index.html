@@ -465,7 +465,7 @@ summary {
 <h1>IODS - Course Project</h1>
 <p><strong>Last updated:</strong></p>
 <pre class="r"><code>date()</code></pre>
-<pre><code>## [1] &quot;Fri Nov 13 00:44:17 2020&quot;</code></pre>
+<pre><code>## [1] &quot;Fri Nov 13 01:24:37 2020&quot;</code></pre>
 </div>
 <div id="about-the-project" class="section level1">
 <h1>About the project</h1>
@@ -629,6 +629,12 @@ plot(model_x, which = c(1,2,5))</code></pre>
 <h1>3: Logistic regression</h1>
 <div id="part-1-1" class="section level2">
 <h2>Part 1</h2>
+<p>The existence of this chapter concludes the first part.</p>
+</div>
+<div id="part-2-1" class="section level2">
+<h2>Part 2</h2>
+<p>This is a joined dataset of math and Portuguese students, aiming to predict the school performance of students by many different variables. Variables are as described <a href="https://archive.ics.uci.edu/ml/datasets/Student+Performance">here</a>, but with the following changes:</p>
+<p>Lists were joined by fixed value variables, and the rest variables were combined by averaging; for example, G1—G3 display the averages of 1st, 2nd and final period grades from both math and Portuguese classes. New columns alc_use (average values of students’ weekday and weekend alcohol consumption values, range being 1—5 from low to very high) and high_use (displays if this average alcohol consumption value is higher than 2 or not) were created.</p>
 <pre class="r"><code># Reading the wrangled data excel
 library(openxlsx)
 pormath &lt;- read.xlsx(&quot;~/R/IODS-project/data/pormath.xlsx&quot;)
@@ -642,11 +648,8 @@ dim(pormath)</code></pre>
 ## [11] &quot;reason&quot;     &quot;guardian&quot;   &quot;traveltime&quot; &quot;studytime&quot;  &quot;schoolsup&quot; 
 ## [16] &quot;famsup&quot;     &quot;activities&quot; &quot;nursery&quot;    &quot;higher&quot;     &quot;internet&quot;  
 ## [21] &quot;romantic&quot;   &quot;famrel&quot;     &quot;freetime&quot;   &quot;goout&quot;      &quot;health&quot;    
-## [26] &quot;n&quot;          &quot;failures&quot;   &quot;paid&quot;       &quot;absences&quot;   &quot;G1&quot;        
-## [31] &quot;G2&quot;         &quot;G3&quot;         &quot;alc_use&quot;    &quot;high_use&quot;   &quot;cid&quot;</code></pre>
-</div>
-<div id="part-2-1" class="section level2">
-<h2>Part 2</h2>
+## [26] &quot;failures&quot;   &quot;paid&quot;       &quot;absences&quot;   &quot;G1&quot;         &quot;G2&quot;        
+## [31] &quot;G3&quot;         &quot;Dalc&quot;       &quot;Walc&quot;       &quot;alc_use&quot;    &quot;high_use&quot;</code></pre>
 </div>
 <div id="part-3-1" class="section level2">
 <h2>Part 3</h2>

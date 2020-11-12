@@ -2,6 +2,14 @@
 
 ## Part 1 
 
+The existence of this chapter concludes the first part.
+
+## Part 2
+
+This is a joined dataset of math and Portuguese students, aiming to predict the school performance of students by many different variables. Variables are as described [here](https://archive.ics.uci.edu/ml/datasets/Student+Performance), but with the following changes:
+
+Lists were joined by fixed value variables, and the rest variables were combined by averaging; for example, G1—G3 display the averages of 1st, 2nd and final period grades from both math and Portuguese classes. New columns alc_use (average values of students' weekday and weekend alcohol consumption values, range being 1—5 from low to very high) and high_use (displays if this average alcohol consumption value is higher than 2 or not) were created.
+
 ```{r}
 # Reading the wrangled data excel
 library(openxlsx)
@@ -11,11 +19,10 @@ pormath <- read.xlsx("~/R/IODS-project/data/pormath.xlsx")
 dim(pormath)
 colnames(pormath)
 
-
 ```
 
-## Part 2
 ## Part 3
+
 ## Part 4
 ## Part 5
 ## Part 6
