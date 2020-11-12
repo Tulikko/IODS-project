@@ -1,6 +1,19 @@
 # 3: Logistic regression
 
 ## Part 1 
+
+```{r}
+# Reading the wrangled data excel
+library(openxlsx)
+pormath <- read.xlsx("~/R/IODS-project/data/pormath.xlsx")
+
+# Sneak peek to the dimensions and column names of the wrangled dataset
+dim(pormath)
+colnames(pormath)
+
+
+```
+
 ## Part 2
 ## Part 3
 ## Part 4
@@ -8,7 +21,3 @@
 ## Part 6
 ## Part 7
 ## Part 8
-```{r}
-
-
-```

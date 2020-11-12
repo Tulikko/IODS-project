@@ -465,7 +465,7 @@ summary {
 <h1>IODS - Course Project</h1>
 <p><strong>Last updated:</strong></p>
 <pre class="r"><code>date()</code></pre>
-<pre><code>## [1] &quot;Thu Nov 12 13:23:48 2020&quot;</code></pre>
+<pre><code>## [1] &quot;Fri Nov 13 00:44:17 2020&quot;</code></pre>
 </div>
 <div id="about-the-project" class="section level1">
 <h1>About the project</h1>
@@ -629,6 +629,21 @@ plot(model_x, which = c(1,2,5))</code></pre>
 <h1>3: Logistic regression</h1>
 <div id="part-1-1" class="section level2">
 <h2>Part 1</h2>
+<pre class="r"><code># Reading the wrangled data excel
+library(openxlsx)
+pormath &lt;- read.xlsx(&quot;~/R/IODS-project/data/pormath.xlsx&quot;)
+
+# Sneak peek to the dimensions and column names of the wrangled dataset
+dim(pormath)</code></pre>
+<pre><code>## [1] 370  35</code></pre>
+<pre class="r"><code>colnames(pormath)</code></pre>
+<pre><code>##  [1] &quot;school&quot;     &quot;sex&quot;        &quot;age&quot;        &quot;address&quot;    &quot;famsize&quot;   
+##  [6] &quot;Pstatus&quot;    &quot;Medu&quot;       &quot;Fedu&quot;       &quot;Mjob&quot;       &quot;Fjob&quot;      
+## [11] &quot;reason&quot;     &quot;guardian&quot;   &quot;traveltime&quot; &quot;studytime&quot;  &quot;schoolsup&quot; 
+## [16] &quot;famsup&quot;     &quot;activities&quot; &quot;nursery&quot;    &quot;higher&quot;     &quot;internet&quot;  
+## [21] &quot;romantic&quot;   &quot;famrel&quot;     &quot;freetime&quot;   &quot;goout&quot;      &quot;health&quot;    
+## [26] &quot;n&quot;          &quot;failures&quot;   &quot;paid&quot;       &quot;absences&quot;   &quot;G1&quot;        
+## [31] &quot;G2&quot;         &quot;G3&quot;         &quot;alc_use&quot;    &quot;high_use&quot;   &quot;cid&quot;</code></pre>
 </div>
 <div id="part-2-1" class="section level2">
 <h2>Part 2</h2>
