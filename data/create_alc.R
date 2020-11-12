@@ -3,8 +3,11 @@
 # Data source: UCI Machine Learning Repository (http://archive.ics.uci.edu/ml/dataset)
 # P. Cortez and A. Silva. Using Data Mining to Predict Secondary School Student Performance.
 
-# Accessing library
-library(dplyr)
+# Accessing libraries
+library(dplyr); library(ggplot2)
+
+# Setting working directory
+setwd("~/R/IODS-project/data/")
 
 # Defining sources for paper and data + where to download them
 paper <- "http://www3.dsi.uminho.pt/pcortez/student.pdf"
@@ -28,6 +31,7 @@ math <- read.table("~/R/IODS-project/data/student/student-mat.csv", sep = ";", h
 # por: [1] 649  33
 dim(por)
 str(por)
+
 # math: [1] 395  33
 dim(math)
 str(math)
@@ -91,15 +95,20 @@ pormath <- por_id %>%
     cid=3000+row_number()
   )
 
-# Save created data to folder 'data' as an Excel worksheet
+# End of Reijo Sund's example for joining data
+
+
+# selecting which columns to keep (to exclude the original .p and .m columns that were joined, I like my tables less messy)
+keep_c <- c("school","sex","age", "address", "famsize", "Pstatus", "Medu", "Fedu", "Mjob", "Fjob", "reason", "guardian", "traveltime", "studytime", "schoolsup", "famsup", "activities", "nursery", "higher", "internet", "romantic", "famrel", "freetime", "goout", "health", "n", "failures", "paid", "absences", "G1", "G2", "G3", "alc_use", "high_use", "cid")
+
+# Creating the analysis dataset with chosen columns
+joined <- select(pormath, one_of(keep_c))
+
+# Saving created data as Excel worksheet
 library(openxlsx)
-write.xlsx(pormath,file="~/R/IODS-project/data/pormath.xlsx")
+write.xlsx(joined, file="~/R/IODS-project/data/pormath.xlsx")
+pormath <- read.xlsx("~/R/IODS-project/data/pormath.xlsx")
 
-# End of Reijo Sund's example
-
-
-pormath <- read.xlsx("pormath.xlsx")
-
+# Checking if everything looks good / 370 objs, 35 columns, so great!
 colnames(pormath)
-
-# NEED TO REMOVE "DOUBLES" NEXT
+dim(pormath)
