@@ -68,8 +68,87 @@ Clearly, there is a trend where higher study time correlates with lower amount o
 
 ## Part 5
 
+Here I fit a logistic regression model to the variables, first including all four from my hypothesis. I will also take a look to the odds ratios for all four of them. Finally, I fit a new model excluding the non-significant variables.
 
+```{r}
+model_alc1 <- glm(high_use ~ G3 + absences + health + goout, data = alc, family = "binomial")
+summary(model_alc1)
+coef(model_alc1)
+
+```
+
+From the P-values we can see that absences and going out with friends are statistically significant (P<0.05), and thus the odds ratios and confidence intervals should be significant. Grades (G3) and health are not significant, although health (P=0.09) is not very far. Coefficients (intercept) show the predicted mean value of y when x = 0. Let's see what the odds ratios and confidence intervals look like:
+
+```{r}
+# odds ratios (OR) & confidence intervals (CI)
+OR <- coef(model_alc1) %>% exp
+CI <- confint(model_alc1) %>% exp
+# Print both
+cbind(OR, CI)
+```
+From odds ratios can be interpreted that students that go out more often are 2.064 times more likely to be heavy drinkers.The more healthy and more absent (from school) ones seem to be just slightly more inclined to report high alcohol use values, and highly scored ones are a bit less (OR<1) likely to be heavy drinkers. The confidence intervals are significant if number 1 cannot be fitted between the 2.5 % and 97.5 % values; this is the case in absences and, especially, in "going out with friends" values.
+
+Right. Let's see what our model looks like with the two significant variables:
+
+```{r}
+model_alc2 <- glm(high_use ~ absences + goout, data = alc, family = "binomial")
+summary(model_alc2)
+```
+P values are very nice now, and Min-Max / 1Q-3Q are not too far off (each pair should be as far from 0, if the model fits well). 
 
 ## Part 6
+
+Here I test the predictive power of this model.
+
+```{r}
+# Explore the predictive power of the model: predict the probability of high_use:
+probabilities <- predict(model_alc2, type = "response")
+
+# Add the predicted probabilities to the dataset 'alc':
+alc <- mutate(alc, probability = probabilities)
+
+# Use the probabilities to make a prediction of high_use:
+alc <- mutate(alc, prediction = probability > 0.5)
+
+# Tabulate the target variable versus the predictions:
+table(high_use = alc$high_use, prediction = alc$prediction) %>% addmargins()
+```
+Here we can see how 236 of 259 not-high alcohol users were predicted by the model. However, only 65 of 111 high users were predicted. Thus, this model seems more accurate in predicting which students are *not* likely to consume lots of alcohol on weekly basis, but misses some of the ones that actually do so.
+
+```{r}
+# plot of 'high_use' versus 'probability' in 'alc'
+g <- ggplot(alc, aes(x = probability, y = high_use, col = prediction))
+g + geom_point()
+```
+Here the same phenomena is illustrated graphically. There are less wrong predictions in the low ("false") alcohol consumption group than there are in the high usage group.
+
+```{r}
+# loss function (= mean prediction error)
+loss_func <- function(class, prob) {
+  n_wrong <- abs(class - prob) > 0.5
+  mean(n_wrong)}
+
+# Average number of wrong predictions in the (training) data
+loss_func(class = alc$high_use, prob = alc$probability)
+
+# Comparing the result to a prediction that there would have been no high-users:
+loss_func(class = alc$high_use, prob = 0)
+loss_func(class = alc$high_use, prob = 1)
+loss_func(class = alc$high_use, prob = 2)
+
+```
+Finally, the loss function shows us that this model missed ~23 % of the predictions, but simply guessing at would have missed 30 %. The guessing strategy's percentage goes rapidly down as prob values increase. Thus, this model is better than simply guessing in predicting high alcohol consumption in students.
+
 ## Part 7
-## Part 8
+
+Simple 10-fold cross-validation
+
+```{r}
+# K-fold cross-validation
+library(boot)
+cv <- cv.glm(data = alc, cost = loss_func, glmfit = model_alc2, K = 10)
+
+# average number of wrong predictions in the cross validation
+cv$delta[1]
+```
+The error is 24 %.
