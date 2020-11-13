@@ -13,17 +13,46 @@ Lists were joined by fixed value variables, and the rest variables were combined
 ```{r}
 # Reading the wrangled data excel
 library(openxlsx)
-pormath <- read.xlsx("~/R/IODS-project/data/pormath.xlsx")
+alc <- read.xlsx("~/R/IODS-project/data/pormath.xlsx")
 
 # Sneak peek to the dimensions and column names of the wrangled dataset
-dim(pormath)
-colnames(pormath)
+dim(alc)
+colnames(alc)
 
 ```
 
 ## Part 3
 
+The purpose of this exercise is to study how the high/low alcohol consumption relates to a few other variables. I chose variables G3 (= average of the final grade in math and Portuguese courses), absences from school, health, and going out with friends. My hypothesis is that high alcohol consumption correlates *negatively* with higher grades and health, and *positively* with absences from school and going out with friends. 
+
 ## Part 4
+
+Let's explore the chosen variables and their relationship with high/low alcohol consumption!
+
+```{r}
+g1 <- ggplot(alc, aes(x = high_use, y = G3, col = sex))
+g1 + geom_boxplot() + ggtitle("Final grade (G3) vs. alcohol consumption") + xlab("High use of alcohol") + ylab("Final grade")
+```
+The first variable
+
+```{r}
+g2 <- ggplot(alc, aes(x = high_use, y = absences, col = sex))
+g2 + geom_boxplot() + ggtitle("Absences from school vs. alcohol consumption") + xlab("High use of alcohol") + ylab("Absences")
+```
+Second
+
+```{r}
+g3 <- ggplot(alc, aes(x = high_use, y = health, col = sex))
+g3 + geom_boxplot() + ggtitle("Health vs. alcohol consumption") + xlab("High use of alcohol") + ylab("Health")
+```
+Third
+
+```{r}
+g4 <- ggplot(alc, aes(x = high_use, y = goout, col = sex))
+g4 + geom_boxplot() + ggtitle("Going out with friends vs. alcohol consumption") + xlab("High use of alcohol") + ylab("Going out with friends")
+```
+Fourth, and final, variable
+
 ## Part 5
 ## Part 6
 ## Part 7
