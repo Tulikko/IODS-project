@@ -39,9 +39,12 @@ My hypothesis seems to work in the case of this first variable; higher alcohol c
 ```{r}
 g2 <- ggplot(alc, aes(x = high_use, y = absences, col = sex))
 g2 + geom_boxplot() + ggtitle("Absences from school vs. alcohol consumption") + xlab("High use of alcohol") + ylab("Absences")
+
+g2_2 <- ggplot(data = alc, aes(x = absences, col=sex))
+g2_2 + geom_bar()
 ```
 
-Second variable supports as well the hypothesis, but the scale in this variable is so big that the few outliers with very high absence values shrink the distribution boxes visually. Curiously, the effect is again pronounced in boys when compared to girls.
+Second variable supports as well the hypothesis, but the scale in this variable is so big that the few outliers with very high absence values shrink the distribution boxes visually. Bar plot was drawn to display distribution more clearly. Curiously, the alcohol consumption effect was again more pronounced in boys when compared to girls.
 
 ```{r}
 g3 <- ggplot(alc, aes(x = high_use, y = health, col = sex))
@@ -64,6 +67,9 @@ alc %>% group_by(studytime) %>% summarise(alcohol_usage = mean(alc_use))
 Clearly, there is a trend where higher study time correlates with lower amount of alcohol consumed. Maybe they don't have as much time to drink. :)
 
 ## Part 5
+
+
+
 ## Part 6
 ## Part 7
 ## Part 8
