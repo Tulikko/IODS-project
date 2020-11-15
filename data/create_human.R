@@ -52,12 +52,39 @@ colnames(hd)[7] <- "GNI"
 colnames(hd)[8] <- "GNI-HDI"
 
 colnames(gii)
-colnames(hd)[1] <- "GII_rank"
-colnames(hd)[3] <- "GII"
-colnames(hd)[4] <- "Maternal_mort"
-colnames(hd)[5] <- ""
-colnames(hd)[6] <- ""
-colnames(hd)[7] <- ""
-colnames(hd)[8] <- ""
-colnames(hd)[9] <- ""
-colnames(hd)[10] <- ""
+colnames(gii)[1] <- "GII_rank"
+colnames(gii)[3] <- "GII"
+colnames(gii)[4] <- "Maternal_mort"
+colnames(gii)[5] <- "Adol_birth"
+colnames(gii)[6] <- "Representation"
+colnames(gii)[7] <- "Edu_F"
+colnames(gii)[8] <- "Edu_M"
+colnames(gii)[9] <- "Labour_F"
+colnames(gii)[10] <- "Labour_M"
+
+# Defining a new column Edu_ratio 
+gii <- mutate(gii, Edu_ratio = (Edu_F / Edu_M))
+
+# Defining a new column Labour_ratio
+gii <- mutate(gii, Labour_ratio = (Labour_F / Labour_M))
+
+
+# Join together the two datasets using the variable Country as the identifier. 
+# Keep only the countries in both data sets (Hint: inner join). The joined 
+# data should have 195 observations and 19 variables. Call the new joined data 
+# "human" and save it in your data folder. (1 point)
+
+
+# Joining the two datasets by "Country"
+human <- inner_join(hd, gii, by = "Country")
+
+# Checking if everything is ok
+glimpse(human)
+
+# All is well, saving the dataset
+write.table(human, "human.txt")
+
+# Checking the txt file
+h1 <- read.table("~/R/IODS-project/data/human.txt")
+colnames(h1)
+dim(h1)
