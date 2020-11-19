@@ -7,7 +7,7 @@ In this exercise we created ‘chapter4.Rmd’ to perform the clustering and cla
 
 Here I initialize the necessary libraries and load the analysis data from MASS library. The dataset consists of 14 variables with 506 observations about housing values in suburbs of Boston.
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 # Libraries
 library(MASS)
 library(corrplot)
