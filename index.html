@@ -453,7 +453,15 @@ summary {
 <li><a href="#part-6">Part 6</a></li>
 <li><a href="#part-7">Part 7</a></li>
 </ul></li>
-<li><a href="#clustering-and-classification">4: Clustering and classification</a></li>
+<li><a href="#clustering-and-classification">4: Clustering and classification</a><ul>
+<li><a href="#part-1-2">Part 1</a></li>
+<li><a href="#part-2-2">Part 2</a></li>
+<li><a href="#part-3-2">Part 3</a></li>
+<li><a href="#part-4-2">Part 4</a></li>
+<li><a href="#part-5-2">Part 5</a></li>
+<li><a href="#part-6-1">Part 6</a></li>
+<li><a href="#part-7-1">Part 7</a></li>
+</ul></li>
 <li><a href="#dimensionality-reduction-techniques">5: Dimensionality reduction techniques</a></li>
 <li><a href="#analysis-of-longitudinal-data">6: Analysis of longitudinal data</a></li>
 </ul>
@@ -464,7 +472,7 @@ summary {
 <h1>IODS - Course Project</h1>
 <p><strong>Last updated:</strong></p>
 <pre class="r"><code>date()</code></pre>
-<pre><code>## [1] &quot;Fri Nov 13 04:24:00 2020&quot;</code></pre>
+<pre><code>## [1] &quot;Fri Nov 20 00:06:12 2020&quot;</code></pre>
 </div>
 <div id="about-the-project" class="section level1">
 <h1>About the project</h1>
@@ -830,7 +838,66 @@ cv$delta[1]</code></pre>
 </div>
 <div id="clustering-and-classification" class="section level1">
 <h1>4: Clustering and classification</h1>
+<div id="part-1-2" class="section level2">
+<h2>Part 1</h2>
+<p>In this exercise we created ‘chapter4.Rmd’ to perform the clustering and classification analysis in.</p>
+</div>
+<div id="part-2-2" class="section level2">
+<h2>Part 2</h2>
+<p>Here I initialize the necessary libraries and load the analysis data from MASS library. The dataset consists of 14 variables with 506 observations about housing values in suburbs of Boston.</p>
+<pre class="r"><code># Libraries
+library(MASS)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;MASS&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
+## 
+##     select</code></pre>
+<pre class="r"><code>library(corrplot)</code></pre>
+<pre><code>## corrplot 0.84 loaded</code></pre>
+<pre class="r"><code>library(dplyr)
+library(ggplot2)
+
+# Load the Boston data from MASS:
+data(&quot;Boston&quot;)
+
+colnames(Boston)</code></pre>
+<pre><code>##  [1] &quot;crim&quot;    &quot;zn&quot;      &quot;indus&quot;   &quot;chas&quot;    &quot;nox&quot;     &quot;rm&quot;      &quot;age&quot;    
+##  [8] &quot;dis&quot;     &quot;rad&quot;     &quot;tax&quot;     &quot;ptratio&quot; &quot;black&quot;   &quot;lstat&quot;   &quot;medv&quot;</code></pre>
+<p>The variables are <strong>crim</strong> (crime rate), <strong>zn</strong> (residential land), <strong>indus</strong> (non-retail business acres), <strong>chas</strong> (dummy variable), <strong>nox</strong> (nitrogen oxides concentration in ppm), <strong>rm</strong> (average rooms), <strong>age</strong> (built prior to 1940), <strong>dis</strong> (distances to employment centres), <strong>rad</strong> (accessibility to radial highways), <strong>tax</strong> (tax rate), <strong>ptratio</strong> (pupil-teacher ratio), <strong>black</strong> (relative proportion of blacks), <strong>lstat</strong> (lower status %) and <strong>medv</strong> (owner-occupied homes).</p>
+<pre class="r"><code># Exploring the data:
+str(Boston)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    506 obs. of  14 variables:
+##  $ crim   : num  0.00632 0.02731 0.02729 0.03237 0.06905 ...
+##  $ zn     : num  18 0 0 0 0 0 12.5 12.5 12.5 12.5 ...
+##  $ indus  : num  2.31 7.07 7.07 2.18 2.18 2.18 7.87 7.87 7.87 7.87 ...
+##  $ chas   : int  0 0 0 0 0 0 0 0 0 0 ...
+##  $ nox    : num  0.538 0.469 0.469 0.458 0.458 0.458 0.524 0.524 0.524 0.524 ...
+##  $ rm     : num  6.58 6.42 7.18 7 7.15 ...
+##  $ age    : num  65.2 78.9 61.1 45.8 54.2 58.7 66.6 96.1 100 85.9 ...
+##  $ dis    : num  4.09 4.97 4.97 6.06 6.06 ...
+##  $ rad    : int  1 2 2 3 3 3 5 5 5 5 ...
+##  $ tax    : num  296 242 242 222 222 222 311 311 311 311 ...
+##  $ ptratio: num  15.3 17.8 17.8 18.7 18.7 18.7 15.2 15.2 15.2 15.2 ...
+##  $ black  : num  397 397 393 395 397 ...
+##  $ lstat  : num  4.98 9.14 4.03 2.94 5.33 ...
+##  $ medv   : num  24 21.6 34.7 33.4 36.2 28.7 22.9 27.1 16.5 18.9 ...</code></pre>
+</div>
+<div id="part-3-2" class="section level2">
+<h2>Part 3</h2>
+</div>
+<div id="part-4-2" class="section level2">
+<h2>Part 4</h2>
+</div>
+<div id="part-5-2" class="section level2">
+<h2>Part 5</h2>
+</div>
+<div id="part-6-1" class="section level2">
+<h2>Part 6</h2>
+</div>
+<div id="part-7-1" class="section level2">
+<h2>Part 7</h2>
 <hr />
+</div>
 </div>
 <div id="dimensionality-reduction-techniques" class="section level1">
 <h1>5: Dimensionality reduction techniques</h1>

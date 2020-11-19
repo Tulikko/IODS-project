@@ -1,6 +1,63 @@
 # 4: Clustering and classification
+## Part 1
+
+In this exercise we created ‘chapter4.Rmd’ to perform the clustering and classification analysis in.
+
+## Part 2
+
+Here I initialize the necessary libraries and load the analysis data from MASS library. The dataset consists of 14 variables with 506 observations about housing values in suburbs of Boston.
+
+```{r}
+# Libraries
+library(MASS)
+library(corrplot)
+library(dplyr)
+library(ggplot2)
+
+# Load the Boston data from MASS:
+data("Boston")
+
+colnames(Boston)
+
+```
+
+The variables are **crim** (crime rate), **zn** (residential land), **indus** (non-retail business acres), **chas** (dummy variable), **nox** (nitrogen oxides concentration in ppm), **rm** (average rooms), **age** (built prior to 1940), **dis** (distances to employment centres), **rad** (accessibility to radial highways), **tax** (tax rate), **ptratio** (pupil-teacher ratio), **black** (relative proportion of blacks), **lstat** (lower status %) and **medv** (owner-occupied homes).
+
+```{r}
+# Exploring the data:
+str(Boston)
+
+```
+
+
+## Part 3
 
 ```{r}
 
+```
+
+## Part 4
+
+```{r}
 
 ```
+
+## Part 5
+
+```{r}
+
+```
+
+## Part 6
+
+```{r}
+
+```
+
+## Part 7
+
+```{r}
+
+```
+
+
