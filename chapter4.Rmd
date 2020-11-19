@@ -146,7 +146,7 @@ table(correct = correct_classes, predicted = lda.pred$class)
 
 ## Part 7
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 # Reload data
 data('Boston')
 
@@ -178,11 +178,11 @@ qplot(x = 1:k_max, y = twcss, geom = 'line')
 km <-kmeans(Boston, centers = 2)
 
 # Visualization by ggpairs, using different colours for different clusters 
-km$cluster <- as.factor(km$cluster)
-ggpairs(Boston, mapping = aes(col = km$cluster))
+cluster <- as.factor(km$cluster)
+ggpairs(Boston, mapping = aes(col = cluster))
 
 # Same with pairs function, not quite as pretty
-pairs(Boston, col = km$cluster)
+pairs(Boston, col = cluster)
 
 ```
 
