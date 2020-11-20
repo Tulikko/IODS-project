@@ -37,7 +37,7 @@ Here we explore the dataset a bit further by showing summary of the variables, a
 # Summary of the variables
 summary(Boston)
 ```
-Like we can see from the min/max/mean values, while all the data are numerical, the scale is very wide, ranging from sub-zero values to over seven hundred. Clustering values with such differences in scale can prove to be challenging, but lets test that out first. 
+Like we can see from the min/max/mean values, while all the data are numerical, the scale is very wide, ranging from sub-zero values to over seven hundred. Clustering values with such differences in scale can prove to be challenging. However, let's take a look at correlations between variables first! 
 
 ```{r}
 
@@ -51,7 +51,7 @@ cor_matrix
 corrplot(cor_matrix, method="circle", type="upper", cl.pos="b", tl.pos="d", tl.cex = 0.6)
 
 ```
-The correlation plot sure is pretty, and it seems like strongest correlation with our variable of interest, crime rate (crim), is with "tax" and "rad" variables. Let's see if this changes after standardization.
+The correlation plot sure is pretty, and it seems like strongest correlation with our variable of interest, crime rate (crim), is with "tax" and "rad" variables.
 
 
 ## Part 4
@@ -71,6 +71,7 @@ boston_scaled <- as.data.frame(boston_scaled)
 
 # Summary of the scaled variables
 summary(boston_scaled)
+
 ```
 The values are much more comparable now. Let's create a categorical variable of the crime rate ("crim"). We use the quantiles as break points in the categorical variable (0 %/25 %/50 %/75 %/100 %) and drop the old crime rate variable. Finally, we divide the dataset to "train" and "test" sets, with 80% of the data in the "train" set.
 
@@ -129,6 +130,10 @@ If I understand the plot correctly, variable "rad" (accessibility to radial high
 
 ## Part 6
 
+In this part we predict the classes with the LDA model on the test data, and cross tabulate the results with the crime categories from the "test" set. 
+
+In the cross tabulation we can see that the model was excellent in predicting high crime rate values (zero mispredicted results), but lower crime rates have a bit more erroneus results, even if the clear majority still was predicted correctly.
+
 ```{r}
 # Save the correct classes from test data:
 correct_classes <- test$crime
@@ -145,6 +150,12 @@ table(correct = correct_classes, predicted = lda.pred$class)
 ```
 
 ## Part 7
+
+Lastly, we reload the data and standardize it with the same method as in part 4. Now we calculate the distances between standardized observations, investigate what is the optimal number of clusters, and run k-means algorithm before and after determining the optimal amount of them.
+
+The optimal amount of clusters is when the value of total Within Sum of Squares ("tWCSS") changes abruptly. With this data, the optimal number of clusters is 2.
+
+From the two visualization plots (ggpairs) for two different K means cluster analysis results, with different number of clusters, we can easily see the difference. The latter one with only 2 clusters is visually much more convincing in its interpreted clusters than the one with 3 clusters.
 
 ```{r, message=FALSE, warning=FALSE}
 # Reload data
@@ -168,21 +179,29 @@ set.seed(123)
 # Maximum number of clusters
 k_max <- 10
 
-# Calculate the total within sum of squares
+# K-means clustering, 1st attempt before determining optimal nr of clusters
+km1 <-kmeans(Boston, centers = 3)
+
+# Visualization by ggpairs, using different colours for different clusters 
+cluster1 <- as.factor(km1$cluster)
+ggpairs(Boston, mapping = aes(col = cluster1))
+
+# Calculate the total within sum of squares to find the optimal number of clusters
 twcss <- sapply(1:k_max, function(k){kmeans(Boston, k)$tot.withinss})
 
 # Visualize the results
 qplot(x = 1:k_max, y = twcss, geom = 'line')
 
 # K-means clustering
-km <-kmeans(Boston, centers = 2)
+km2 <-kmeans(Boston, centers = 2)
+summary(km2)
 
 # Visualization by ggpairs, using different colours for different clusters 
-cluster <- as.factor(km$cluster)
-ggpairs(Boston, mapping = aes(col = cluster))
+cluster2 <- as.factor(km2$cluster)
+ggpairs(Boston, mapping = aes(col = cluster2))
 
 # Same with pairs function, not quite as pretty
-pairs(Boston, col = cluster)
+pairs(Boston, col = cluster2)
 
 ```
 
