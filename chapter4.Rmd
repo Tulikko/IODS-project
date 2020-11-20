@@ -177,7 +177,7 @@ summary(dist_man)
 set.seed(123)
 
 # Maximum number of clusters
-k_max <- 10
+k_max <- 6
 
 # K-means clustering, 1st attempt before determining optimal nr of clusters
 km1 <-kmeans(Boston, centers = 3)
