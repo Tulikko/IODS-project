@@ -85,6 +85,6 @@ glimpse(human)
 write.table(human, "human.txt")
 
 # Checking the txt file
-h1 <- read.table("~/R/IODS-project/data/human.txt")
+h1 <- read.table("~/R/IODS-project/data/human1.txt")
 colnames(h1)
 dim(h1)
