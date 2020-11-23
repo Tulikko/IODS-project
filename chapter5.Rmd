@@ -15,6 +15,10 @@ ggpairs(human)
 
 cor(human) %>% corrplot (type = "lower", tl.cex = 0.7, tl.pos="d", cl.pos="r")
 
+ggplot(human, aes(x = Edu, y = Life)) + geom_point() + geom_smooth(method = "lm") + ggtitle("Education equals life?")
+
+ggplot(human, aes(x = Maternal_mort, y = Life)) + geom_point() + geom_smooth(method = "lm") + ggtitle("Maternal mortality does not equal life.")
+
 ```
 
 **Part 2**
