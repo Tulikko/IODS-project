@@ -1,10 +1,10 @@
 # 3: Logistic regression
 
-## Part 1 
+**Part 1** 
 
-The existence of this chapter concludes the first part.
+The existence of this chapter concludes the first part of the exercise.
 
-## Part 2
+**Part 2**
 
 This is a joined dataset of math and Portuguese students, aiming to predict the school performance of students by many different variables. Variables are as described [here](https://archive.ics.uci.edu/ml/datasets/Student+Performance), but with the following changes:
 
@@ -21,11 +21,11 @@ colnames(alc)
 
 ```
 
-## Part 3
+**Part 3**
 
 The purpose of this exercise is to study how the high/low alcohol consumption relates to a few other variables. I chose variables G3 (= average of the final grade in math and Portuguese courses), absences from school, health, and going out with friends. My hypothesis is that high alcohol consumption correlates *negatively* with higher grades and health, and *positively* with absences from school and going out with friends. I will also explore how alcohol consumption relates to reported study times.
 
-## Part 4
+**Part 4**
 
 Let's explore the chosen variables and their relationship with high/low alcohol consumption!
 
@@ -66,7 +66,7 @@ alc %>% group_by(studytime) %>% summarise(alcohol_usage = mean(alc_use))
 ```
 Clearly, there is a trend where higher study time correlates with lower amount of alcohol consumed. Maybe they don't have as much time to drink. :)
 
-## Part 5
+**Part 5**
 
 Here I fit a logistic regression model to the variables, first including all four from my hypothesis. I will also take a look to the odds ratios for all four of them. Finally, I fit a new model excluding the non-significant variables.
 
@@ -96,7 +96,7 @@ summary(model_alc2)
 ```
 P values are very nice now, and Min-Max / 1Q-3Q are not too far off (each pair should be as far from 0, if the model fits well). 
 
-## Part 6
+**Part 6**
 
 Here I test the predictive power of this model.
 
@@ -139,7 +139,7 @@ loss_func(class = alc$high_use, prob = 2)
 ```
 Finally, the loss function shows us that this model missed ~23 % of the predictions, but simply guessing at would have missed 30 %. The guessing strategy's percentage goes rapidly down as prob values increase. Thus, this model is better than simply guessing in predicting high alcohol consumption in students.
 
-## Part 7
+**Part 7**
 
 Simple 10-fold cross-validation
 

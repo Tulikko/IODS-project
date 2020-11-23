@@ -1,9 +1,10 @@
 # 4: Clustering and classification
-## Part 1
+
+**Part 1**
 
 In this exercise we created ‘chapter4.Rmd’ to perform the clustering and classification analysis in.
 
-## Part 2
+**Part 2**
 
 Here I initialize the necessary libraries and load the analysis data from MASS library. The dataset consists of 14 variables with 506 observations about housing values in suburbs of Boston.
 
@@ -29,7 +30,7 @@ str(Boston)
 
 ```
 
-## Part 3
+**Part 3**
 
 Here we explore the dataset a bit further by showing summary of the variables, and then exploring correlations between variables both numerically and visually.
 
@@ -54,7 +55,7 @@ corrplot(cor_matrix, method="circle", type="upper", cl.pos="b", tl.pos="d", tl.c
 The correlation plot sure is pretty, and it seems like strongest correlation with our variable of interest, crime rate (crim), is with "tax" and "rad" variables.
 
 
-## Part 4
+**Part 4**
 
 In this part we standardize the dataset to have more comparable values. If one variable has huge values with big differences, and other has intrinsically very small values with equally small differences, we might miss correlations between them as the bigger scale completely dominates the output. 
 
@@ -98,7 +99,7 @@ train <- boston_scaled[ind,]
 test <- boston_scaled[-ind,]
 ```
 
-## Part 5
+**Part 5**
 
 Here we perform the linear discriminant analysis of how the crime rate classes (broken into "low","med_low","med_high" and "high" in the previous part) cluster, and visualize results in a biplot. 
 
@@ -128,7 +129,7 @@ lda.arrows(lda.fit, myscale = 2)
 
 If I understand the plot correctly, variable "rad" (accessibility to radial highways) is very strong indicator of high (blue) crime rate values. High "zn" (residential land) value is somewhat indicative of low (black) values, and "nox" (nitrogen oxides) correlates most to med_high crime rate values.
 
-## Part 6
+**Part 6**
 
 In this part we predict the classes with the LDA model on the test data, and cross tabulate the results with the crime categories from the "test" set. 
 
@@ -149,7 +150,7 @@ table(correct = correct_classes, predicted = lda.pred$class)
 
 ```
 
-## Part 7
+**Part 7**
 
 Lastly, we reload the data and standardize it with the same method as in part 4. Now we calculate the distances between standardized observations, investigate what is the optimal number of clusters, and run k-means algorithm before and after determining the optimal amount of them.
 

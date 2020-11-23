@@ -2,7 +2,7 @@
 
 *Here I describe the work that I have done.*
 
-## Part 1 
+**Part 1** 
 
 [Here](https://github.com/Tulikko/IODS-project/blob/master/data/create_learning2020.R) is the dataset that I wrangled in the previous part of the excercise. The full analysis dataset table can be read with read.table("data/learning2020.txt"), but that would be a ton of hard-to-read data to display in this diary page, so let's just take a closer look at the structure and dimensions of what we've got.
 
@@ -20,7 +20,7 @@ str(lrn2020)
 head(lrn2020)
 
 ```
-## Part 2 
+**Part 2** 
 
 Here I explore the data by summary function and by creating miscellaneous plots. In the graphical overview (produced with the function "ggpairs") we see that the highest correlation value between two variables is between attitude and points, with correlation value of 0.437 (highest or 100% correlation being 1). I also explored this phenomena by playing around with gendered scatterplots and fitted lines.
 
@@ -54,7 +54,7 @@ qplot(attitude, points, data = m_students) + geom_smooth(method = "lm") + ggtitl
 
 ```
 
-## Part 3
+**Part 3**
 
 Based on the previous results, I chose attitude, strategic learning and deep learning as explanatory variables to a regression model (model_x), in which exam points is the target (dependent) variable. 
 
@@ -72,7 +72,7 @@ model_y <- lm(points ~ attitude + stra, data = lrn2020)
 
 summary(model_y)
 ```
-## Part 4 
+**Part 4** 
 
 In the adjusted model, attitude and the intercept are clearly significant, but strategic learning (p-value 0.08927) has ~9 % risk of not being significant.
 
@@ -81,7 +81,7 @@ Multiple R-squared -value (0.2048) means that 20,48 % of the total variation in 
 ```{r}
 
 ```
-## Part 5 
+**Part 5** 
 
 In this part I produced a few diagnostic plots: Residuals vs Fitted values, Normal QQ-plot and Residuals vs Leverage. 
 

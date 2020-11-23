@@ -5,7 +5,7 @@ date()
 
 ```
 
-# About the project
+# 1: About the project
 
 The initial setting up of all the necessary tools proved to be a bit of a challenge. R Studio didn't seem to be able to download all the necessary packages for "knitting" the changes. However, after a rather lengthy troubleshooting session and some help everything finally fell into place.
 
