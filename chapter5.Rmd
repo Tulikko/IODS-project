@@ -1,9 +1,43 @@
 # 5: Dimensionality reduction techniques
 
+**Part 1**
+
 ```{r}
+# Libraries
+library(GGally);library(corrplot)
+
 # Fetching the wrangled data
 human <- read.table("data/human.txt")
 
 glimpse(human)
 
+ggpairs(human)
+
+cor(human) %>% corrplot (type = "lower", tl.cex = 0.7, tl.pos="d", cl.pos="r")
+
 ```
+
+**Part 2**
+
+```{r}
+
+```
+
+**Part 3**
+
+```{r}
+
+```
+
+**Part 4**
+
+```{r}
+
+```
+
+**Part 5**
+
+```{r}
+
+```
+
