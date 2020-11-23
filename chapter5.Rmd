@@ -1,6 +1,9 @@
 # 5: Dimensionality reduction techniques
 
 ```{r}
+# Fetching the wrangled data
+human <- read.table("data/human.txt")
 
+glimpse(human)
 
 ```

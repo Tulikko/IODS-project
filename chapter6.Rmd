@@ -1,6 +1,11 @@
 # 6: Analysis of longitudinal data
 
 ```{r}
+# Fetching the wrangled data
+bprs <- read.table("data/bprs.txt")
+rats <- read.table("data/rats.txt")
 
+glimpse(bprs)
+glimpse(rats)
 
 ```
