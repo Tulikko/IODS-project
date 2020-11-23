@@ -4,7 +4,7 @@
 
 ```{r}
 # Libraries
-library(GGally);library(corrplot)
+library(dplyr); library(GGally);library(corrplot)
 
 # Fetching the wrangled data
 human <- read.table("data/human.txt")
@@ -23,9 +23,29 @@ ggplot(human, aes(x = Maternal_mort, y = Life)) + geom_point() + geom_smooth(met
 
 **Part 2**
 
-```{r}
+First, we perform PCA (principal component analysis) to the unaltered data:
+
+```{r, message=FALSE, warning=FALSE}
+
+# PCA (with the SVD method)
+pca_human1 <- prcomp(human)
+summary(pca_human1)
+
+# Biplot of the PC representation and the original variables
+biplot(pca_human1, choices = 1:2, cex = c(0.8, 1), col = c("grey40", "deeppink2"))
 
 ```
+The variable GNI completely dominates and explains all the variation, as its values are so huge in comparison to other variables. Thus, we need to standardize the data to get comparable results.
+
+```{r, message=FALSE, warning=FALSE}
+human_s <- scale(human)
+pca_human <- prcomp(human_s)
+
+summary(pca_human)
+biplot(pca_human, choices = 1:2, cex = c(0.8, 1), col = c("grey40", "deeppink2"))
+
+```
+
 
 **Part 3**
 
