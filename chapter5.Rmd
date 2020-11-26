@@ -38,23 +38,19 @@ biplot(pca_human1, choices = 1:2, cex = c(0.5, 0.7), col = c("grey80", "deeppink
 \
 The variable GNI completely dominates and explains all the variation in the raw data, as the numerical values of GNI are so huge in comparison to the other variables. Thus, we need to standardize the data to get more meaningful results from this analysis.
 
+
+**Part 3**
+
+```{r}
 ```{r, message=FALSE, warning=FALSE}
 human_s <- scale(human)
 pca_human <- prcomp(human_s)
 
 summary(pca_human)
 biplot(pca_human, choices = 1:2, cex = c(0.5, 0.7), col = c("grey80", "deeppink2"))
-
 ```
 \
 Now the data is much more readable.
-
-**Part 3**
-
-```{r}
-
-```
-
 **Part 4**
 
 ```{r}
@@ -64,6 +60,19 @@ Now the data is much more readable.
 **Part 5**
 
 ```{r}
+library(FactoMineR); library(tidyr)
+data("tea")
+colnames(tea)
 
+teaplaces <- tea[,7:13]
+
+colnames(teaplaces)
+
+gather(teaplaces) %>% ggplot(aes(value)) + facet_wrap("key", scales = "free") + geom_bar() + theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 8))
+
+mca <- MCA(teaplaces, graph = FALSE)
+summary(mca)
+
+plot(mca, invisible=c("ind"), habillage = "quali")
 ```
 
