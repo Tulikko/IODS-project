@@ -41,7 +41,6 @@ The variable GNI completely dominates and explains all the variation in the raw 
 
 **Part 3**
 
-```{r}
 ```{r, message=FALSE, warning=FALSE}
 human_s <- scale(human)
 pca_human <- prcomp(human_s)
@@ -51,6 +50,7 @@ biplot(pca_human, choices = 1:2, cex = c(0.5, 0.7), col = c("grey80", "deeppink2
 ```
 \
 Now the data is much more readable.
+
 **Part 4**
 
 ```{r}
@@ -59,12 +59,14 @@ Now the data is much more readable.
 
 **Part 5**
 
-```{r}
+Here we explore data of tea drinking habits from FactoMineR library. The original dataset contains 36 different variables (see colnames below for the full list), but I decided to separate the data containing information about tea drinking places, the type of tea (earl grey, green or black) and age quartales (the variable age_G) for a closer look. We visualize these selected variables and their internal distribution by simple column charts, and then perform Multiple Correspondence Analysis (MCA) to see if any patterns can be interpreted. 
+
+```{r, message=FALSE, warning=FALSE}
 library(FactoMineR); library(tidyr)
 data("tea")
 colnames(tea)
 
-teaplaces <- tea[,7:13]
+teaplaces <- tea[,c(7:13,23)]
 
 colnames(teaplaces)
 
