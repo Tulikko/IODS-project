@@ -2,6 +2,19 @@
 
 **Part 1**
 
+The wrangled dataset consists of 8 columns describing quality of life factors by country. These variables are:
+
+- "Life"            (num) Life expectancy at birth
+- "Edu"             (num) Expected years of schooling
+- "GNI"             (chr) Gross National Income per capita
+- "Maternal_mort"   (int) Maternal mortality ratio
+- "Adol_birth"      (num) Adolescent birth rate
+- "Representation"  (num) Percent of representation in parliament
+- "Edu_ratio"       (num) Edu_F / Edu_M ratio
+- "Labour_ratio"    (num) Labour_F / Labour_M ratio
+
+Let's explore the data and plot out the possible correlations!
+
 ```{r}
 # Libraries
 library(dplyr); library(GGally);library(corrplot)
@@ -20,6 +33,8 @@ ggplot(human, aes(x = Edu, y = Life)) + geom_point() + geom_smooth(method = "lm"
 ggplot(human, aes(x = Maternal_mort, y = Life)) + geom_point() + geom_smooth(method = "lm") + ggtitle("Maternal mortality does not equal life.")
 
 ```
+\
+The highest positive correlations seem to be between education and life expectancy, and between maternal mortality and adolescent bith rate. Strongest negative correlation is between life expectancy and maternal mortality, which kind of makes sense. From the ggpairs we see how the data points ploit against each other - the highest positive correlation pairs seem like good candidates for fitting some nice linear regression lines to them, so I did. I did not bother to check or analyze the intecepts, though - this exercise is, after all, about multivariate analysis.
 
 **Part 2**
 
@@ -38,8 +53,9 @@ biplot(pca_human1, choices = 1:2, cex = c(0.5, 0.7), col = c("grey80", "deeppink
 \
 The variable GNI completely dominates and explains all the variation in the raw data, as the numerical values of GNI are so huge in comparison to the other variables. Thus, we need to standardize the data to get more meaningful results from this analysis.
 
-
 **Part 3**
+
+Let's scale the data, perform the analysis again, and name our biplot labels according to the variance percentages!
 
 ```{r, message=FALSE, warning=FALSE}
 # Scaling the data and performing the PCA analysis again
@@ -63,16 +79,11 @@ biplot(pca_human, choices = 1:2, cex = c(0.5, 0.7), col = c("grey80", "deeppink2
 \
 Now the data is much more readable. 
 
-```{r}
-
-```
-
 
 **Part 4**
 
-```{r}
+We can see that the principal component 1 explains up to 53,6 % of the variation, and it consists of variables such as life expectancy and educational factors. Gender factors, such as labour ratio and representation in the parliament, explain 16,2 % of the variation. Education, life expectancy and GNI cluster to the far left of the biplot, and maternal mortality and adolescent birth ratio to the far right, and from the arrows we can see that they have opposing effects.
 
-```
 
 **Part 5**
 
@@ -94,4 +105,5 @@ summary(mca)
 
 plot(mca, invisible=c("ind"), habillage = "quali")
 ```
+\
 The first dimension explains 15.06 % of the variance in this data subset, and adding Dim 2, the cumulative explanatory value ends up to 26.76 %. This is not very high explanatory value, but we can see some interesting patterns from the visualization nevertheless. Drinking green tea clusters to the far left and together with "not somewhere" values - home being the closest place variable to it. Earl Grey is most likely drank by young people, and not at home. Black tea is favored by the older folks. Out of this test group, the 35-44 year old age quartile is the most likely to drink tea in a tearoom or restaurant. They will also most likely drink black tea, but this preference is not as strong as within the oldest group. From the previous column charts we saw that the green tea drinkers, as well as those who drank tea somewhere else than "home", were in the clear minority, which explains why these groups are so distinguished in the MCA biplot.
