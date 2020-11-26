@@ -42,14 +42,31 @@ The variable GNI completely dominates and explains all the variation in the raw 
 **Part 3**
 
 ```{r, message=FALSE, warning=FALSE}
+# Scaling the data and performing the PCA analysis again
 human_s <- scale(human)
 pca_human <- prcomp(human_s)
 
 summary(pca_human)
-biplot(pca_human, choices = 1:2, cex = c(0.5, 0.7), col = c("grey80", "deeppink2"))
+
+# Calculate and print rounded percentages of variance
+s <- summary(pca_human)
+pca_p <- round(1*s$importance[2, ]*100, digits = 1)
+pca_p
+
+# Assign corresponding percentages to labels
+pc_l <- paste0(names(pca_p), " (", pca_p, " %)")
+
+# Scaled biplot with corresponding variance percentages in labels
+biplot(pca_human, choices = 1:2, cex = c(0.5, 0.7), col = c("grey80", "deeppink2"), xlab = pc_l[1], ylab = pc_l[2])
+
 ```
 \
-Now the data is much more readable.
+Now the data is much more readable. 
+
+```{r}
+
+```
+
 
 **Part 4**
 
@@ -72,9 +89,9 @@ colnames(teaplaces)
 
 gather(teaplaces) %>% ggplot(aes(value)) + facet_wrap("key", scales = "free") + geom_bar() + theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 8))
 
-mca <- MCA(teaplaces, graph = FALSE)
+mca <- MCA(teaplaces, graph = F)
 summary(mca)
 
 plot(mca, invisible=c("ind"), habillage = "quali")
 ```
-
+The first dimension explains 15.06 % of the variance in this data subset, and adding Dim 2, the cumulative explanatory value ends up to 26.76 %. This is not very high explanatory value, but we can see some interesting patterns from the visualization nevertheless. Drinking green tea clusters to the far left and together with "not somewhere" values - home being the closest place variable to it. Earl Grey is most likely drank by young people, and not at home. Black tea is favored by the older folks. Out of this test group, the 35-44 year old age quartile is the most likely to drink tea in a tearoom or restaurant. They will also most likely drink black tea, but this preference is not as strong as within the oldest group. From the previous column charts we saw that the green tea drinkers, as well as those who drank tea somewhere else than "home", were in the clear minority, which explains why these groups are so distinguished in the MCA biplot.
