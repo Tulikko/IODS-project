@@ -36,11 +36,24 @@ Implement the analyses of Chapter 8 of MABS using the RATS data.
 
 ```{r}
 
+# Plots of individual rat growth profiles within their corresponding groups
+
 ggplot(data_R, aes(x = Time, y = Weight, group = ID, col = Group)) +
-  geom_line(aes(linetype = Group)) +
+  geom_line(aes(linetype = Group)) + 
+  
+  scale_linetype_manual(values = rep(1:10, times=4)) +
+  facet_grid(. ~ Group, labeller = label_both) +
+  
   scale_x_continuous(name = "Time (days)", breaks = seq(0, 60, 10)) +
   scale_y_continuous(name = "Weight (grams)") +
   theme(legend.position = "top")
+
+```
+\
+Text
+
+```{r}
+
 
 ```
 
@@ -51,7 +64,7 @@ Implement the analyses of Chapter 9 of MABS using the BPRS data.
 
 ```{r}
 
-# Next: assign unique ID to subjects for plotting purposes
+# Plot of BPRS scores of subjects against time, colored by treatment group
 
 ggplot(data_B, aes(x = week, y = bprs, group = id)) +
   geom_line(aes(col = treatment)) +
@@ -60,6 +73,11 @@ ggplot(data_B, aes(x = week, y = bprs, group = id)) +
   theme(legend.position = "top")
 
 ```
+\
+Text
 
+```{r}
+
+```
 
 
