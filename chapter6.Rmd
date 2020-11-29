@@ -3,7 +3,7 @@
 Note: you may have to factor the categorical variables again.
 
 ```{r}
-library(dplyr); library(ggplot2)
+library(dplyr); library(ggplot2); library(lme4)
 
 # Fetching the wrangled data
 data_B <- read.table("data/bprs.txt")
@@ -40,13 +40,10 @@ Implement the analyses of Chapter 8 of MABS using the RATS data.
 
 ggplot(data_R, aes(x = Time, y = Weight, group = ID, col = Group)) +
   geom_line(aes(linetype = Group)) + 
-  
-  scale_linetype_manual(values = rep(1:10, times=4)) +
   facet_grid(. ~ Group, labeller = label_both) +
-  
   scale_x_continuous(name = "Time (days)", breaks = seq(0, 60, 10)) +
   scale_y_continuous(name = "Weight (grams)") +
-  theme(legend.position = "top")
+  theme(legend.position = "none")
 
 ```
 \
@@ -72,12 +69,60 @@ ggplot(data_B, aes(x = week, y = bprs, group = id)) +
   scale_y_continuous(name = "BPRS score") +
   theme(legend.position = "top")
 
+# Standardizing the variable "bprs" to "bprs_std", plotting again
+
+data_B <- data_B %>%
+  group_by(week) %>%
+  mutate(bprs_std = (bprs - mean(bprs))/sd(bprs) ) %>%
+  ungroup()
+
+ggplot(data_B, aes(x = week, y = bprs_std, group = id)) +
+  geom_line(aes(col = treatment, linetype = treatment)) +
+  scale_y_continuous(name = "Standardized BPRS score")
+
+```
+\
+Text
+
+```{r, warning=F, message=F}
+# Regression model
+bprs_reg <- lm(bprs ~ week + treatment, 
+               data = data_B)
+
+summary(bprs_reg)
+
+# Random intercept model 1
+bprs_ref1 <- lmer(bprs ~ week + treatment + (1 | id), 
+                 data = data_B, REML = FALSE)
+summary(bprs_ref1)
+
+# Random intercept model 2
+bprs_ref2 <- lmer(bprs ~ week + treatment + (week | id), 
+                 data = data_B, REML = FALSE)
+summary(bprs_ref2)
+
+# Random intercept model 2
+bprs_ref3 <- lmer(bprs ~ week + treatment +treatment*week + (week | id), 
+                 data = data_B, REML = FALSE)
+summary(bprs_ref3)
+
+# ANOVA test on the models
+anova(bprs_ref1,bprs_ref2)
+anova(bprs_ref2,bprs_ref3)
+
 ```
 \
 Text
 
 ```{r}
+# Visualization of random intercept model "bprs_ref2"
+data_B$fitted2 <- fitted(bprs_ref2)
+
+ggplot(data_B, aes(x = week, y = fitted2, group = id)) +
+  geom_line(aes(col = treatment, linetype = treatment)) +
+  scale_y_continuous(name = "Fitted BPRS") +
+  theme(legend.position = "top")
 
 ```
-
-
+\
+Text
