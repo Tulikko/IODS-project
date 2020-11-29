@@ -1,11 +1,42 @@
 # 6: Analysis of longitudinal data
 
+Note: you may have to factor the categorical variables again.
+
 ```{r}
+library(dplyr)
+
 # Fetching the wrangled data
 bprs <- read.table("data/bprs.txt")
 rats <- read.table("data/rats.txt")
 
+# Factoring categorical variables again, as R interprets them as integers
+bprs$treatment <- factor(bprs$treatment)
+bprs$subject <- factor(bprs$subject)
+rats$ID <- factor(rats$ID)
+rats$Group <- factor(rats$Group)
+
+# Glimpse of the data
 glimpse(bprs)
 glimpse(rats)
 
 ```
+
+**Part 1**
+
+Implement the analyses of Chapter 8 of MABS using the RATS data. 
+
+```{r}
+
+```
+
+
+**Part 2**
+
+Implement the analyses of Chapter 9 of MABS using the BPRS data. 
+
+```{r}
+
+```
+
+
+
