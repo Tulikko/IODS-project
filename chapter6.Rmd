@@ -3,7 +3,7 @@
 Note: you may have to factor the categorical variables again.
 
 ```{r}
-library(dplyr)
+library(dplyr); library(ggplot2)
 
 # Fetching the wrangled data
 bprs <- read.table("data/bprs.txt")
@@ -26,6 +26,13 @@ glimpse(rats)
 Implement the analyses of Chapter 8 of MABS using the RATS data. 
 
 ```{r}
+
+ggplot(rats, aes(x = Time, y = Weight, group = ID, col = Group)) +
+  geom_line(aes(linetype = Group)) +
+  scale_x_continuous(name = "Time (days)", breaks = seq(0, 60, 10)) +
+  scale_y_continuous(name = "Weight (grams)") +
+  theme(legend.position = "top")
+
 
 ```
 
