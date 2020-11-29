@@ -2,7 +2,7 @@
 
 Note: you may have to factor the categorical variables again.
 
-```{r}
+```{r, warning=F, message=F}
 library(dplyr); library(ggplot2); library(lme4)
 
 # Fetching the wrangled data
@@ -36,6 +36,10 @@ Implement the analyses of Chapter 8 of MABS using the RATS data.
 
 ```{r}
 
+# Boxplot to visualize the raw data
+ggplot(data_R, aes(x = as.factor(Time), y = Weight, fill = Group)) + 
+  geom_boxplot()
+
 # Plots of individual rat growth profiles within their corresponding groups
 
 ggplot(data_R, aes(x = Time, y = Weight, group = ID, col = Group)) +
@@ -45,15 +49,89 @@ ggplot(data_R, aes(x = Time, y = Weight, group = ID, col = Group)) +
   scale_y_continuous(name = "Weight (grams)") +
   theme(legend.position = "none")
 
+# Standardizing weight
+
+data_R <- data_R %>%
+  group_by(Time) %>%
+  mutate(Weight_std = (Weight - mean(Weight))/sd(Weight) ) %>%
+  ungroup()
+
+# Plotting again with standardized weights
+
+ggplot(data_R, aes(x = Time, y = Weight_std, group = ID, col = Group)) +
+  geom_line(aes(linetype = Group)) + 
+  facet_grid(. ~ Group, labeller = label_both) +
+  scale_x_continuous(name = "Time (days)", breaks = seq(0, 60, 10)) +
+  scale_y_continuous(name = "Standardized weight") +
+  theme(legend.position = "none")
+
+```
+\
+Text
+
+$$se=\frac{sd(x)}{\sqrt{n}}$$
+
+```{r}
+
+# Summary data with mean and standard error of weight by group and time 
+n <- data_R$Time %>% unique() %>% length()
+
+rats_s <- data_R %>%
+  group_by(Group, Time) %>%
+  summarise( mean = mean(Weight), se = sd(Weight)/sqrt(n) ) %>%
+  ungroup()
+
+# Glimpse the data
+glimpse(rats_s)
+
+# Plot the mean profiles
+ggplot(rats_s, aes(x = Time, y = mean, col = Group)) +
+  geom_line(size=1) +
+  geom_point(size=3, shape=10) +
+  geom_errorbar(aes(ymin = mean - se, ymax = mean + se)) +
+  scale_y_continuous(name = "mean(weight) +/- se(weight)")
+
+```
+
+\
+Text
+
+```{r}
+
+# Summary dataset by treatment and subject with mean as the summary variable (ignoring baseline Time = 1).
+rats_sum <- data_R %>%
+  filter(Time > 1) %>%
+  group_by(Group, ID) %>%
+  summarise( mean=mean(Weight) ) %>%
+  ungroup()
+
+# Glimpse the data
+glimpse(rats_sum)
+
+# Draw a boxplot of the mean versus treatment
+ggplot(rats_sum, aes(x = Group, y = mean)) +
+  geom_boxplot() +
+  stat_summary(fun = "mean", geom = "point", shape=23, size=4, fill = "white") +
+  scale_y_continuous(name = "Mean weight after the start of diets")
+
 ```
 \
 Text
 
 ```{r}
 
+# Creating a new dataset by filtering the three outliers 
+rats_sum2 <- rats_sum %>%
+  filter(ID!=2 & ID!=12 & ID!=13)  # Outlier ID's
 
+ggplot(rats_sum2, aes(x = Group, y = mean)) +
+  geom_boxplot() +
+  stat_summary(fun = "mean", geom = "point", shape=23, size=4, fill = "white") +
+  scale_y_continuous(name = "Mean weight after the start of diets")  
+  
 ```
-
+\
+Text
 
 **Part 2**
 
