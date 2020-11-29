@@ -34,7 +34,7 @@ ggplot(human, aes(x = Maternal_mort, y = Life)) + geom_point() + geom_smooth(met
 
 ```
 \
-The highest positive correlations seem to be between education and life expectancy, and between maternal mortality and adolescent bith rate. Strongest negative correlation is between life expectancy and maternal mortality, which kind of makes sense. From the ggpairs we see how the data points ploit against each other - the highest positive correlation pairs seem like good candidates for fitting some nice linear regression lines to them, so I did. I did not bother to check or analyze the intecepts, though - this exercise is, after all, about multivariate analysis.
+The highest positive correlations seem to be between education and life expectancy, and between maternal mortality and adolescent bith rate. Strongest negative correlation is between life expectancy and maternal mortality, which kind of makes sense. From the ggpairs we see how the data points plot against each other - the highest positive and negative correlation pairs seem like good candidates for fitting some nice linear regression lines to them, so I did. I did not bother to analyze these plots or the fitted lines' intercepts any further, though - this exercise is, after all, about multivariate analysis.
 
 **Part 2**
 
