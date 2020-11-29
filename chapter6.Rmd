@@ -10,11 +10,11 @@ data_B <- read.table("data/bprs.txt")
 data_R <- read.table("data/rats.txt")
 
 # Assigning separate ID:s for same subjects but different treatments
+# so that we have ID:s 1-20 for treatment 1 and 21-40 for treatment 2 
 data_B$subject <- as.integer(data_B$subject)
 data_B$id <- 
   ifelse(data_B$treatment==1,
          data_B$subject,data_B$subject+20)
-unique(data_B$id)
 
 # Factoring categorical variables again, as R interprets them as integers
 data_B$treatment <- factor(data_B$treatment)
@@ -132,6 +132,21 @@ ggplot(rats_sum2, aes(x = Group, y = mean)) +
 ```
 \
 Text
+
+```{r, warning=F, message=F}
+# Add the baseline from the original data as a new variable to the summary data
+baselines <- 
+  data_R %>% filter(Time==1) %>%
+  rename(baseline=Weight)
+
+rats_b <- rats_sum %>%
+  mutate(baselines)
+
+anova(lm(mean ~ baseline + mean, data = rats_b))
+
+```
+
+
 
 **Part 2**
 
