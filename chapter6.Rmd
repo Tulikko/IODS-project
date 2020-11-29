@@ -6,18 +6,27 @@ Note: you may have to factor the categorical variables again.
 library(dplyr); library(ggplot2)
 
 # Fetching the wrangled data
-bprs <- read.table("data/bprs.txt")
-rats <- read.table("data/rats.txt")
+data_B <- read.table("data/bprs.txt")
+data_R <- read.table("data/rats.txt")
+
+# Assigning separate ID:s for same subjects but different treatments
+data_B$subject <- as.integer(data_B$subject)
+data_B$id <- 
+  ifelse(data_B$treatment==1,
+         data_B$subject,data_B$subject+20)
+unique(data_B$id)
 
 # Factoring categorical variables again, as R interprets them as integers
-bprs$treatment <- factor(bprs$treatment)
-bprs$subject <- factor(bprs$subject)
-rats$ID <- factor(rats$ID)
-rats$Group <- factor(rats$Group)
+data_B$treatment <- factor(data_B$treatment)
+data_B$subject <- factor(data_B$subject)
+data_R$ID <- factor(data_R$ID)
+data_R$Group <- factor(data_R$Group)
 
 # Glimpse of the data
-glimpse(bprs)
-glimpse(rats)
+glimpse(data_B)
+glimpse(data_R)
+summary(data_B)
+summary(data_R)
 
 ```
 
@@ -27,12 +36,11 @@ Implement the analyses of Chapter 8 of MABS using the RATS data.
 
 ```{r}
 
-ggplot(rats, aes(x = Time, y = Weight, group = ID, col = Group)) +
+ggplot(data_R, aes(x = Time, y = Weight, group = ID, col = Group)) +
   geom_line(aes(linetype = Group)) +
   scale_x_continuous(name = "Time (days)", breaks = seq(0, 60, 10)) +
   scale_y_continuous(name = "Weight (grams)") +
   theme(legend.position = "top")
-
 
 ```
 
@@ -42,6 +50,14 @@ ggplot(rats, aes(x = Time, y = Weight, group = ID, col = Group)) +
 Implement the analyses of Chapter 9 of MABS using the BPRS data. 
 
 ```{r}
+
+# Next: assign unique ID to subjects for plotting purposes
+
+ggplot(data_B, aes(x = week, y = bprs, group = id)) +
+  geom_line(aes(col = treatment)) +
+  scale_x_continuous(name = "Week") +
+  scale_y_continuous(name = "BPRS score") +
+  theme(legend.position = "top")
 
 ```
 
