@@ -136,10 +136,13 @@ ggplot(rats_sum2, aes(x = Group, y = mean)) +
   
 ```
 \
-Now the box plots are much less deviated by these outlier rats.
+Now the box plots are much less deviated by these outlier rats. Finally, let's compute analysis of variance (anova) tables for this data with and without baseline weight (weight at day 1 from the original data).
 
 ```{r, warning=F, message=F}
-# Add the baseline from the original data as a new variable to the summary data
+# Analysis of variance table for the fitted model, without baselines 
+anova(lm(mean ~ Group, data = rats_sum2))
+
+# Adding the baseline from the original data as a new variable
 baselines <- 
   data_R %>% filter(Time==1) %>%
   rename(baseline=Weight)
@@ -148,15 +151,18 @@ rats_b <- rats_sum %>%
   mutate(baselines) %>%
   filter(ID!=2 & ID!=12 & ID!=13)  # Outlier ID's
 
-anova(lm(mean ~ baseline + mean, data = rats_b))
+# Analysis of variance table for the fitted model, with baselines 
+anova(lm(mean ~ Group + baseline, data = rats_b))
 
 ```
-
+The diet group's mean weight difference is statistically significant, at p value well under 0,05. In the baseline including analysis, we see that "baseline" weight doesn't affect this result, and "baseline" variable is not statistically significant in this model. As the rats were apparently assigned to the groups by their starting weight (save for the mega rat in group 2, that we excluded from this analysis), their baseline weight corresponds roughly to the group mean weight, and thus this result makes sense.
 
 
 **Part 2**
 
-Implement the analyses of Chapter 9 of MABS using the BPRS data. 
+Here we implement the analyses of Chapter 9 of MABS using the BPRS (Brief Psychiatric Rating Scale) data. As with rats, this data is preorganized to long form from the original wide form.
+
+First, let's check the line plots for this data, both in raw and in standardized forms:
 
 ```{r}
 
