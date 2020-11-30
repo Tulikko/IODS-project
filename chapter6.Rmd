@@ -187,7 +187,7 @@ ggplot(data_B, aes(x = week, y = bprs_std, group = id)) +
 
 ```
 \
-Text
+There seems to be slight decrease in BPRS results in both treatment groups, but these plots are not very clear to read or interpret. So, let's fit regression model and series of random intercept models for performing multilevel linear regression model to our data!
 
 ```{r, warning=F, message=F}
 # Regression model
@@ -207,17 +207,25 @@ bprs_ref2 <- lmer(bprs ~ week + treatment + (week | id),
 summary(bprs_ref2)
 
 # Random intercept model 2
-bprs_ref3 <- lmer(bprs ~ week + treatment +treatment*week + (week | id), 
+bprs_ref3 <- lmer(bprs ~ week + treatment + treatment*week + (week | id), 
                  data = data_B, REML = FALSE)
 summary(bprs_ref3)
 
+
+```
+\
+From the models abow we can see that only the variant "week" seems to be significant contributor to improvements in the BPRS. Treatment doesn't explain differences between individuals. In the last random intercept model (bprs_ref3) we explore if the effect of treatment is indeed dependent on time by adding term "treatment*week".
+
+There is 47 % correlation between "treatment 2" and "week" - let's see how analysis of variance table looks like between "bprs_ref1" & "bprs_ref2", and "bprs_ref2" & "bprs_ref3".
+
+```{r}
 # ANOVA test on the models
 anova(bprs_ref1,bprs_ref2)
 anova(bprs_ref2,bprs_ref3)
 
 ```
 \
-Text
+According to Pr(>Chisq) values, the bprs_ref1,bprs_ref2 pair performed better than bprs_ref2,bprs_ref3 pair. Let's visualize our bprs_ref2 model for comparison to the original raw data line charts:
 
 ```{r}
 # Visualization of random intercept model "bprs_ref2"
@@ -227,7 +235,8 @@ ggplot(data_B, aes(x = week, y = fitted2, group = id)) +
   geom_line(aes(col = treatment, linetype = treatment)) +
   scale_y_continuous(name = "Fitted BPRS") +
   theme(legend.position = "top")
-
 ```
-\
-Text
+
+The chart is much easier to interpret than the messy zig zag raw data, and the model seems to perfom pretty well. We can see that BPRS scores decrease in both groups with passing time, but there are no clear differences between treatment groups.
+
+There we have it! Happy holidays, fellow course participants :)
