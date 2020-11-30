@@ -36,7 +36,7 @@ summary(data_R)
 
 **Part 1**
 
-The assignment was to implement the analyses of Chapter 8 of MABS using the RATS data. 
+The assignment was to implement the analyses of Chapter 8 of MABS using the RATS data. First, let's visualize the data with boxplots and line charts of both individual rats, and the mean profiles by diet groups. I also produced line chart for standardized weights.
 
 ```{r}
 
@@ -71,7 +71,7 @@ ggplot(data_R, aes(x = Time, y = Weight_std, group = ID, col = Group)) +
 
 ```
 \
-Text
+The standardized values plot shows that the starting weight tends to affect the end weight (this is called "tracking phenomenon") - the heaviest rats in the beginning are still heaviest by the end of the experiment, and thinnest stay among the thinnest. Let's plot mean weights by group against time, with standard error (se) calculated by the following equation:
 
 $$se=\frac{sd(x)}{\sqrt{n}}$$
 
@@ -96,9 +96,10 @@ ggplot(rats_s, aes(x = Time, y = mean, col = Group)) +
   scale_y_continuous(name = "mean(weight) +/- se(weight)")
 
 ```
-
 \
-Text
+So, in group 2 there is this one very heavy rat that gives the mean values in the second group much bigger error than the other two groups have. Otherwise the groups are nicely sorted by weight - thin rats in group 1, heaviest ones in group 3 (except for this one humongous rat in group 2). All groups tend to gain weight on their corresponding diets. 
+
+Next, let's draw boxplots of the mean weights by group after day one (which is the baseline).
 
 ```{r}
 
@@ -120,7 +121,7 @@ ggplot(rats_sum, aes(x = Group, y = mean)) +
 
 ```
 \
-Text
+There are three outliers in this data. Let's see how the plots look like if we exclude these outliers:
 
 ```{r}
 
@@ -135,7 +136,7 @@ ggplot(rats_sum2, aes(x = Group, y = mean)) +
   
 ```
 \
-Text
+Now the box plots are much less deviated by these outlier rats.
 
 ```{r, warning=F, message=F}
 # Add the baseline from the original data as a new variable to the summary data
@@ -144,7 +145,8 @@ baselines <-
   rename(baseline=Weight)
 
 rats_b <- rats_sum %>%
-  mutate(baselines)
+  mutate(baselines) %>%
+  filter(ID!=2 & ID!=12 & ID!=13)  # Outlier ID's
 
 anova(lm(mean ~ baseline + mean, data = rats_b))
 
