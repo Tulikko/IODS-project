@@ -1,6 +1,10 @@
 # 6: Analysis of longitudinal data
 
-Note: you may have to factor the categorical variables again.
+For the last exercise, we wrangled two datasets into long form from the original wide form, in order to allow us to perform analysis on them. 
+
+Basically this means that we broke joined data in columns (we had certain time intervals as colums containing the corresponding measured results) to separate these time periods to their own column, resulting in four variables for each set; "treatment", "subject", "bprs" and "week" for BPRS dataset, describing response in measured BPRS test results to two different treatments to schizophrenia; and "ID", "Group", "Weight" and "Time" in RATS data which investigates measured rat weights after starting one of three possible diet groups.
+
+As "week" and "time" are now their own variables, instead of "week0, week1, week2" etc., we can perform analysis that shows us measured responses over time. I ended up adding a new column, id, to the BPRS data, as this allowed me to plot different treatment groups simultaneously - the two treatment groups contained identical 1-20 subjects, whereas the new id category treats each individual response to a certain treatment as unique.
 
 ```{r, warning=F, message=F}
 library(dplyr); library(ggplot2); library(lme4)
@@ -32,7 +36,7 @@ summary(data_R)
 
 **Part 1**
 
-Implement the analyses of Chapter 8 of MABS using the RATS data. 
+The assignment was to implement the analyses of Chapter 8 of MABS using the RATS data. 
 
 ```{r}
 
